@@ -9,5 +9,29 @@
         <h1 class="content-center text-center text-3xl text-primary">
             This is my homepage
         </h1>
+        <div>
+            <input
+                class="form-control"
+                type="search"
+                name="search"
+                placeholder="Search for A Post..."
+                hx-post="/search"
+                hx-trigger="input changed delay:500ms, keyup[=='Enter'], load"
+                hx-target="#Blogs"
+                hx-indicator=".htmx-indicator"
+            />
+        </div>
+        <div id="blogs">
+            {{ range .PostsData.Posts }}
+            <div class="text-white">{{ .Title }}</div>
+            <div class="text-white">Post Content: {{ .Excerpt }}</div>
+            <a
+                href="/blog/{{ .Slug }}"
+                class="rounded-2xl bg-red-600 text-white"
+            >
+                Go
+            </a>
+            {{ end }}
+        </div>
     </body>
 </html>

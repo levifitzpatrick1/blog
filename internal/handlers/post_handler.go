@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"database/sql"
+	"html/template"
 	"log"
 	"net/http"
 	"strings"
@@ -65,10 +66,10 @@ func (h *PostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	pageData := struct {
 		Post                generatedDB.Post
-		RenderedHTMLContent string
+		RenderedHTMLContent template.HTML
 	}{
 		Post:                post,
-		RenderedHTMLContent: string(renderedHTMLContent),
+		RenderedHTMLContent: template.HTML(renderedHTMLContent),
 	}
 
 	webTemplates.RenderTemplate(w, "post_page.html", pageData)
