@@ -56,5 +56,5 @@ func (h *SearchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}{
 		Posts: posts,
 	}
-	webTemplates.RenderTemplate(w, "post_list_items.html", postsData)
+	webTemplates.RenderTemplate(w, "post_card_list.html", postsData)
 }

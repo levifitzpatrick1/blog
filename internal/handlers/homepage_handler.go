@@ -55,8 +55,8 @@ func (h *HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		CurrentSort: s,
 	}
 
-	if r.Header.Get("HX-Request") == "true" && r.Header.Get("HX-Target") == "#posts-list-container" {
-		webTemplates.RenderTemplate(w, "post_list_items.html", postData)
+	if r.Header.Get("HX-Request") == "true" && r.Header.Get("HX-Target") == "#Blogs" {
+		webTemplates.RenderTemplate(w, "post_card_list.html", postData)
 		return
 	}
 

@@ -5,39 +5,27 @@
         <script src="https://unpkg.com/htmx.org@2.0.4"></script>
         <link href="../static/css/style.css" rel="stylesheet" />
     </head>
-    <body>
+    <body class="bg-background text-primary">
         <h1 class="content-center text-center text-3xl text-primary">
             This is my homepage
         </h1>
-        <div>
-            <input
-                class="form-control"
-                type="search"
-                name="search"
-                placeholder="Search for A Post..."
-                hx-post="/search"
-                hx-trigger="input changed delay:500ms, keyup[=='Enter'], load"
-                hx-target="#Blogs"
-                hx-indicator=".htmx-indicator"
-            />
-        </div>
-        <div id="blogs">
-            {{ range .PostsData.Posts }}
-        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-            <div class="px-6 py-4">
-                <div class="font-bold text-primary text-xl mb-2">
-                    {{ .Title }}
-                </div>
-                <p class="text-primary">
-                    {{ .Excerpt }}
-                </p>
-                <a href="/blog/{{ .Slug }}"
-                    class="size-2 rounded-b-sm bg-red-700 text-primary">
-                        Go
-                    </a>
+        <div class="my-8 flex justify-center px-4">
+            <div class="w-full md:w-2/3 lg:w-1/2">
+                <input
+                    class="w-full border-1 border-border bg-card-background text-primary rounded-full py-3 px-5 transition-all duration-300 focus:outline-none focus:border-accent-hover focus:ring-1 focus:ring-accent-hover"
+                    type="search"
+                    name="search"
+                    placeholder="Search for a post..."
+                    hx-post="/search"
+                    hx-trigger="input changed delay:500ms, search"
+                    hx-target="#blogs"
+                    hx-indicator=".htmx-indicator"
+                />
             </div>
         </div>
-        {{ end }}
-
+        <div id="Blogs">
+            {{ block "post-list" .PostsData }} {{ template "post_card_list.html"
+            . }} {{ end }}
+        </div>
     </body>
 </html>

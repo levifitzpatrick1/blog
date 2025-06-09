@@ -1,0 +1,21 @@
+<div class="posts-container flex flex-wrap justify-center gap-6 p-4">
+    {{ range $post := .Posts }}
+    <div
+        class="post-item flex-shrink-0 transform transition-transform duration-300 hover:scale-105"
+    >
+        <a href="/blog/{{ $post.Slug }}" class="block">
+            {{ template "post_card.html" $post }}
+        </a>
+    </div>
+    {{ end }}
+</div>
+
+<style>
+    .post-item:nth-child(even) {
+        margin-top: 3rem;
+    }
+
+    .post-item:nth-child(odd) {
+        margin-bottom: 3rem;
+    }
+</style>
