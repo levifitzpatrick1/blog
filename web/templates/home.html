@@ -5,7 +5,7 @@
         <script src="https://unpkg.com/htmx.org@2.0.4"></script>
         <link href="../static/css/style.css" rel="stylesheet" />
     </head>
-    <body class="bg-dark_background">
+    <body>
         <h1 class="content-center text-center text-3xl text-primary">
             This is my homepage
         </h1>
@@ -23,15 +23,21 @@
         </div>
         <div id="blogs">
             {{ range .PostsData.Posts }}
-            <div class="text-white">{{ .Title }}</div>
-            <div class="text-white">Post Content: {{ .Excerpt }}</div>
-            <a
-                href="/blog/{{ .Slug }}"
-                class="rounded-2xl bg-red-600 text-white"
-            >
-                Go
-            </a>
-            {{ end }}
+        <div class="max-w-sm rounded overflow-hidden shadow-lg">
+            <div class="px-6 py-4">
+                <div class="font-bold text-primary text-xl mb-2">
+                    {{ .Title }}
+                </div>
+                <p class="text-primary">
+                    {{ .Excerpt }}
+                </p>
+                <a href="/blog/{{ .Slug }}"
+                    class="size-2 rounded-b-sm bg-red-700 text-primary">
+                        Go
+                    </a>
+            </div>
         </div>
+        {{ end }}
+
     </body>
 </html>
