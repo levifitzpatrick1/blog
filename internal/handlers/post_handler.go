@@ -7,10 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gomarkdown/markdown"
-	"github.com/gomarkdown/markdown/html"
-	"github.com/gomarkdown/markdown/parser"
 	generatedDB "github.com/levifitzpatrick1/blog/internal/database/generated"
+	"github.com/levifitzpatrick1/blog/internal/markdown"
 	webTemplates "github.com/levifitzpatrick1/blog/web/templates"
 )
 
@@ -23,16 +21,12 @@ func NewPostHandler(q *generatedDB.Queries, l *log.Logger) *PostHandler {
 	return &PostHandler{Queries: q, Logger: l}
 }
 
-func markdownToHTML(md []byte) string {
-	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock
-	p := parser.NewWithExtensions(extensions)
-	doc := p.Parse(md)
-
-	htmlFlags := html.CommonFlags | html.HrefTargetBlank
-	opts := html.RendererOptions{Flags: htmlFlags}
-	renderer := html.NewRenderer(opts)
-
-	return string(markdown.Render(doc, renderer))
+type PostPageData struct {
+	Title          string
+	HTMLContent    template.HTML
+	PublishDate    string
+	UpdateDate     string
+	ShowUpdateDate bool
 }
 
 func (h *PostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -55,21 +49,22 @@ func (h *PostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	extensions := parser.CommonExtensions | parser.AutoHeadingIDs
-	p := parser.NewWithExtensions(extensions)
-	doc := p.Parse([]byte(post.Content))
+	renderedHTMLContent, err := markdown.RenderHTML(post.Content)
+	if err != nil {
+		log.Printf("Error rendering markdown as HTML: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
 
-	htmlFlags := html.CommonFlags | html.HrefTargetBlank
-	opts := html.RendererOptions{Flags: htmlFlags}
-	renderer := html.NewRenderer(opts)
-	renderedHTMLContent := markdown.Render(doc, renderer)
+	publishDate := post.Published.Time.Format("01/02/2006")
+	updateDate := post.Updated.Time.Format("01/02/2006")
+	showUpdate := publishDate != updateDate
 
-	pageData := struct {
-		Post                generatedDB.Post
-		RenderedHTMLContent template.HTML
-	}{
-		Post:                post,
-		RenderedHTMLContent: template.HTML(renderedHTMLContent),
+	pageData := PostPageData{
+		Title:          post.Title,
+		HTMLContent:    template.HTML(renderedHTMLContent),
+		PublishDate:    publishDate,
+		UpdateDate:     updateDate,
+		ShowUpdateDate: showUpdate,
 	}
 
 	webTemplates.RenderTemplate(w, "post_page.html", pageData)

@@ -7,8 +7,17 @@
     </head>
     <body class="bg-background text-primary">
         <h1 class="content-center text-center text-3xl text-primary">
-            This is my homepage
+            Levi Fitzpatrick
         </h1>
+        <p class="text-secondary text-xl max-w-4xl text-left p-8">
+            I am Levi Fitzpatrick. This site is a place for me to store posts
+            about projects and Ideas that I have, and are currently, working on.
+            Many of the posts here will end up being related to designing FRC
+            Robots both in mechanical and software scopes. I am currently a lead
+            mentor of FRC Team 2064 Panther Project, mainly filling the role of
+            sofware engineer mentor. This stems from my career choice of a
+            mechanical engineer masquarading as a software engineer.
+        </p>
         <div class="my-8 flex justify-center px-4">
             <div class="w-full md:w-2/3 lg:w-1/2">
                 <input
@@ -24,8 +33,8 @@
             </div>
         </div>
         <div id="Blogs">
-            {{ block "post-list" .PostsData }} {{ template "post_card_list.html"
-            . }} {{ end }}
+            {{ block "post-list" .PostsData }} {{ template
+            "post_card_list.html". }} {{ end }}
         </div>
     </body>
 </html>

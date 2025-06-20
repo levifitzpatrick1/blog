@@ -10,3 +10,34 @@
     --color-accent: #06b6d4;
     --color-accent-hover: #0891b2;
 }
+
+/* Add this to the bottom of web/static/css/input.css */
+
+@layer components {
+    .arrow-span {
+        display: inline-block;
+        transition: transform 0.2s ease-out;
+    }
+
+    .back-button:hover .arrow-span {
+        animation: travel-arrow 0.2s linear infinite;
+    }
+}
+
+@keyframes travel-arrow {
+    0% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(-120%);
+        opacity: 0;
+    }
+    60% {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
