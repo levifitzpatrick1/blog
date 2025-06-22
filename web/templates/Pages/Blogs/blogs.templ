@@ -1,0 +1,35 @@
+package blogPage
+
+import "github.com/levifitzpatrick1/blog/internal/database/generated"
+import "github.com/levifitzpatrick1/blog/web/templates/components"
+import "github.com/levifitzpatrick1/blog/web/templates/layouts"
+
+type BlogsData struct {
+	Posts       []db.ListPostsRow
+	CurrentSort string
+	CurrentPath string
+}
+
+templ Blogs(data BlogsData) {
+	@layouts.Sub("Blog", data.CurrentPath, layouts.HtmxScript()) {
+		<body class="bg-background text-primary">
+			<div class="my-8 flex justify-center px-4">
+				<div class="w-full md:w-2/3 lg:w-1/2">
+					<input
+						class="w-full border-1 border-border bg-card-background text-primary rounded-full py-3 px-5 transition-all duration-300 focus:outline-none focus:border-accent-hover focus:ring-1 focus:ring-accent-hover"
+						type="search"
+						name="search"
+						placeholder="Search for a post..."
+						hx-post="/search"
+						hx-trigger="input changed delay:500ms, search"
+						hx-target="#blogs"
+						hx-indicator=".htmx-indicator"
+					/>
+				</div>
+			</div>
+			<div id="Blogs">
+				@components.PostCardList(data.Posts)
+			</div>
+		</body>
+	}
+}

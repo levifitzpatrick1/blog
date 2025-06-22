@@ -8,7 +8,6 @@ import (
 
 	generatedDB "github.com/levifitzpatrick1/blog/internal/database/generated"
 	"github.com/levifitzpatrick1/blog/internal/handlers"
-	webTemplates "github.com/levifitzpatrick1/blog/web/templates"
 	_ "modernc.org/sqlite"
 )
 
@@ -31,8 +30,6 @@ func main() {
 
 	queries := generatedDB.New(sqlDB)
 
-	webTemplates.LoadTemplates("web/templates")
-
 	site := &Site{
 		Queries: queries,
 		Logger:  logger,
@@ -41,24 +38,21 @@ func main() {
 	mux := http.NewServeMux()
 
 	homeHandler := handlers.NewHomeHandler(site.Queries, site.Logger)
+	resumeHandler := handlers.NewResumeHandler(site.Queries, site.Logger)
+	blogIndexHandler := handlers.NewBlogIndexHandler(site.Queries, site.Logger)
 	postHandler := handlers.NewPostHandler(site.Queries, site.Logger)
 	searchHandler := handlers.NewSearchHandler(site.Queries, site.Logger)
+	frcHandler := handlers.NewFRCHandler(site.Logger)
 
 	staticDir := "./web/static"
-	if _, statErr := os.Stat(staticDir); os.IsNotExist(statErr) {
-		logger.Println("Warning: Static directory './web/static' not found. CSS might not load.")
-	} else {
-		logger.Printf("Serving static files from: %s", staticDir)
-	}
-	logger.Printf("Serving static files from: %s", staticDir)
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
 
 	mux.HandleFunc("GET /{$}", homeHandler.ServeHTTP)
-	mux.HandleFunc("GET /search", searchHandler.ServeHTTP)
+	mux.HandleFunc("GET /blog", blogIndexHandler.ServeHTTP)
 	mux.HandleFunc("GET /blog/{slug}", postHandler.ServeHTTP)
-	mux.HandleFunc("/request", func(w http.ResponseWriter, r *http.Request) {
-		println("got request")
-	})
+	mux.HandleFunc("POST /search", searchHandler.ServeHTTP)
+	mux.HandleFunc("GET /frc", frcHandler.ServeHTTP)
+	mux.HandleFunc("GET /resume", resumeHandler.ServeHTTP)
 
 	logger.Printf("Starting server @ %s", addr)
 	err = http.ListenAndServe(addr, mux)

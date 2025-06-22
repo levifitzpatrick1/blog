@@ -11,8 +11,6 @@
     --color-accent-hover: #0891b2;
 }
 
-/* Add this to the bottom of web/static/css/input.css */
-
 @layer components {
     .arrow-span {
         display: inline-block;
@@ -29,11 +27,11 @@
         transform: translateX(0);
     }
     40% {
-        transform: translateX(-120%);
+        transform: translateX(-60%);
         opacity: 0;
     }
     60% {
-        transform: translateX(120%);
+        transform: translateX(60%);
         opacity: 0;
     }
     100% {

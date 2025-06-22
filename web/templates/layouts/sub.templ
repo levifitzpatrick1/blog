@@ -1,0 +1,61 @@
+package layouts
+
+import "strings"
+
+type NavLink struct {
+	Path  string
+	Label string
+}
+
+templ Sub(title, currentPath string, scripts ...templ.Component) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<title>{ title }</title>
+			<link href="/static/css/style.css" rel="stylesheet"/>
+			for _, s := range scripts {
+				@s
+			}
+		</head>
+		<body class="bg-background text-primary">
+			<nav class="p-4 flex justify-between items-center">
+				<div>
+					<a href="/" class="text-2xl font-bold text-accent hover:text-accent-hover transition-colors">
+						Levi Fitzpatrick
+					</a>
+				</div>
+				<div class="flex items-center space-x-2">
+					@navButton(NavLink{Path: "/frc", Label: "FRC"}, currentPath)
+					@navButton(NavLink{Path: "/blog", Label: "Blog"}, currentPath)
+					@navButton(NavLink{Path: "/resume", Label: "Resume"}, currentPath)
+				</div>
+			</nav>
+			<main class="p-4 sm:p-6 md:p-8">
+				{ children... }
+			</main>
+		</body>
+	</html>
+}
+
+templ navButton(link NavLink, currentPath string) {
+	{{
+		isActive := false
+		if link.Path == "/blog" {
+			isActive = strings.HasPrefix(currentPath, "/blog")
+		} else {
+			isActive = (currentPath == link.Path)
+		}
+
+		baseClasses := "font-bold py-2 px-4 rounded-lg transition-colors duration-300"
+		var stateClasses string
+		if isActive {
+			stateClasses = "bg-accent text-background"
+		} else {
+			stateClasses = "border border-accent text-accent hover:bg-accent-hover hover:text-background"
+		}
+	}}
+	<a href={ templ.URL(link.Path) } class={ templ.Classes(baseClasses, stateClasses) }>
+		{ link.Label }
+	</a>
+}

@@ -1,0 +1,18 @@
+package Pages
+
+import "github.com/levifitzpatrick1/blog/web/templates/layouts"
+
+type ResumeData struct {
+	ResumePDF []byte
+}
+
+templ ResumePage() {
+	@layouts.Sub("Resume", "/resume") {
+		<button type="button">
+			Download PDF
+		</button>
+		<div>
+			more detailed info about me
+		</div>
+	}
+}

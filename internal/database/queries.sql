@@ -46,3 +46,17 @@ WHERE
     OR content LIKE ?
 ORDER BY
     published DESC;
+
+-- name: GetLatestPost :one
+SELECT
+    title,
+    slug
+FROM
+    posts
+WHERE
+    published IS NOT NULL
+ORDER BY
+    updated,
+    published DESC
+LIMIT
+    1;

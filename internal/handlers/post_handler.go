@@ -9,7 +9,7 @@ import (
 
 	generatedDB "github.com/levifitzpatrick1/blog/internal/database/generated"
 	"github.com/levifitzpatrick1/blog/internal/markdown"
-	webTemplates "github.com/levifitzpatrick1/blog/web/templates"
+	templates "github.com/levifitzpatrick1/blog/web/templates/Pages/Blogs"
 )
 
 type PostHandler struct {
@@ -19,14 +19,6 @@ type PostHandler struct {
 
 func NewPostHandler(q *generatedDB.Queries, l *log.Logger) *PostHandler {
 	return &PostHandler{Queries: q, Logger: l}
-}
-
-type PostPageData struct {
-	Title          string
-	HTMLContent    template.HTML
-	PublishDate    string
-	UpdateDate     string
-	ShowUpdateDate bool
 }
 
 func (h *PostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -53,13 +45,14 @@ func (h *PostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Printf("Error rendering markdown as HTML: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
 
 	publishDate := post.Published.Time.Format("01/02/2006")
 	updateDate := post.Updated.Time.Format("01/02/2006")
 	showUpdate := publishDate != updateDate
 
-	pageData := PostPageData{
+	pageData := templates.PostPageData{
 		Title:          post.Title,
 		HTMLContent:    template.HTML(renderedHTMLContent),
 		PublishDate:    publishDate,
@@ -67,5 +60,11 @@ func (h *PostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		ShowUpdateDate: showUpdate,
 	}
 
-	webTemplates.RenderTemplate(w, "post_page.html", pageData)
+	// Render the templ component
+	component := templates.PostPage(pageData)
+	err = component.Render(ctx, w)
+	if err != nil {
+		h.Logger.Print("Error rendering template: ", err)
+		http.Error(w, "Failed to render page.", http.StatusInternalServerError)
+	}
 }

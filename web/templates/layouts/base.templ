@@ -1,0 +1,22 @@
+package layouts
+
+templ Base(title string, scripts ...templ.Component) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<title>{ title }</title>
+			<link href="/static/css/style.css" rel="stylesheet"/>
+			for _, s := range scripts {
+				@s
+			}
+		</head>
+		<body class="bg-background text-primary">
+			{ children... }
+		</body>
+	</html>
+}
+
+templ HtmxScript() {
+	<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiV6BAbdqWNb0APSRiG8htG5F+eI2eH3tdIKBMAoMwn" crossorigin="anonymous"></script>
+}

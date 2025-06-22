@@ -1,0 +1,47 @@
+package blogPage
+
+import "html/template"
+
+type PostPageData struct {
+	Title          string
+	HTMLContent    template.HTML
+	PublishDate    string
+	UpdateDate     string
+	ShowUpdateDate bool
+}
+
+templ PostPage(data PostPageData) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<title>{ data.Title }</title>
+			<link rel="stylesheet" href="/static/css/style.css"/>
+		</head>
+		<body class="bg-background p-4 sm:p-6 md:p-8">
+			<div class="max-w-4xl mx-auto bg-card-background p-6 sm:p-8 rounded-lg shadow">
+				<div class="mb-4">
+					<a href="/" class="back-button text-2xl text-background bg-accent w-auto px-2 py-0.5 rounded-2xl hover:bg-accent-hover inline-block overflow-hidden">
+						<span class="arrow-span">&larr;</span>
+					</a>
+				</div>
+				<div class="mb-8">
+					<h1 class="text-4xl font-bold text-primary mb-2">
+						{ data.Title }
+					</h1>
+					<p class="text-sm text-secondary">
+						Levi Fitzpatrick | Published: { data.PublishDate }
+						if data.ShowUpdateDate {
+							<span class="italic text-secondary">
+								* Updated: { data.UpdateDate }
+							</span>
+						}
+					</p>
+				</div>
+				<article class="text-primary prose lg:prose-xl max-w-none">
+					@templ.Raw(data.HTMLContent)
+				</article>
+			</div>
+		</body>
+	</html>
+}

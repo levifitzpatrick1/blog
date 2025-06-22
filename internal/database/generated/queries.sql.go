@@ -10,6 +10,33 @@ import (
 	"database/sql"
 )
 
+const getLatestPost = `-- name: GetLatestPost :one
+SELECT
+    title,
+    slug
+FROM
+    posts
+WHERE
+    published IS NOT NULL
+ORDER BY
+    updated,
+    published DESC
+LIMIT
+    1
+`
+
+type GetLatestPostRow struct {
+	Title string
+	Slug  string
+}
+
+func (q *Queries) GetLatestPost(ctx context.Context) (GetLatestPostRow, error) {
+	row := q.db.QueryRowContext(ctx, getLatestPost)
+	var i GetLatestPostRow
+	err := row.Scan(&i.Title, &i.Slug)
+	return i, err
+}
+
 const getPostBySlug = `-- name: GetPostBySlug :one
 SELECT
     id, title, slug, content, published, updated

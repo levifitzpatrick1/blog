@@ -5,7 +5,9 @@ go 1.24.1
 require github.com/mattn/go-sqlite3 v1.14.28
 
 require (
-	github.com/gomarkdown/markdown v0.0.0-20250311123330-531bef5e742b
+	github.com/a-h/templ v0.3.898
+	github.com/yuin/goldmark v1.7.12
+	github.com/yuin/goldmark-highlighting/v2 v2.0.0-20230729083705-37449abec8cc
 	modernc.org/sqlite v1.37.1
 )
 
@@ -17,8 +19,6 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
-	github.com/yuin/goldmark v1.7.12 // indirect
-	github.com/yuin/goldmark-highlighting/v2 v2.0.0-20230729083705-37449abec8cc // indirect
 	golang.org/x/exp v0.0.0-20250408133849-7e4ce0ab07d0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	modernc.org/libc v1.65.7 // indirect
