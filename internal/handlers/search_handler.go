@@ -2,6 +2,7 @@
 package handlers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -28,10 +29,11 @@ func (h *SearchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if query == "" {
 		posts, err = h.Queries.ListPosts(ctx)
 	} else {
+		searchPattern := fmt.Sprintf("%%%s%%", query)
 		var searchResults []generatedDB.SearchPostsRow
 		searchResults, err = h.Queries.SearchPosts(ctx, generatedDB.SearchPostsParams{
-			Title:   query,
-			Content: query,
+			Title:   searchPattern,
+			Content: searchPattern,
 		})
 
 		if err == nil {

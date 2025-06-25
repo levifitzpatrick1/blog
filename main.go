@@ -47,12 +47,12 @@ func main() {
 	staticDir := "./web/static"
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
 
-	mux.HandleFunc("GET /{$}", homeHandler.ServeHTTP)
-	mux.HandleFunc("GET /blog", blogIndexHandler.ServeHTTP)
-	mux.HandleFunc("GET /blog/{slug}", postHandler.ServeHTTP)
-	mux.HandleFunc("POST /search", searchHandler.ServeHTTP)
-	mux.HandleFunc("GET /frc", frcHandler.ServeHTTP)
-	mux.HandleFunc("GET /resume", resumeHandler.ServeHTTP)
+	mux.HandleFunc("/{$}", homeHandler.ServeHTTP)
+	mux.HandleFunc("/blog", blogIndexHandler.ServeHTTP)
+	mux.HandleFunc("/blog/{slug}", postHandler.ServeHTTP)
+	mux.HandleFunc("/search", searchHandler.ServeHTTP)
+	mux.HandleFunc("/frc", frcHandler.ServeHTTP)
+	mux.HandleFunc("/resume", resumeHandler.ServeHTTP)
 
 	logger.Printf("Starting server @ %s", addr)
 	err = http.ListenAndServe(addr, mux)

@@ -5,11 +5,10 @@ import "github.com/levifitzpatrick1/blog/internal/database/generated"
 templ PostCard(post db.ListPostsRow) {
 	<a href={ templ.URL("/blog/" + post.Slug) }>
 		<div
-			class="group border-border max-w-sm rounded-xl overflow-hidden shadow-xs shadow-black bg-card-background hover:shadow-md hover:shadow-accent-hover transition-shadow duration-300 ease-in-out"
-		>
+			class="post-card group border-border max-w-sm rounded-xl overflow-hidden shadow-xs shadow-black bg-card-background hover:shadow-md hover:shadow-accent-hover transition-shadow duration-300 ease-in-out"		>
 			<div class="px-6 py-4">
 				<div class="flex justify-between items-start mb-2">
-					<div class="font-bold text-primary text-xl">{ post.Title }</div>
+					<div class="font-bold text-primary text-lg">{ post.Title }</div>
 					<div class="text-secondary text-sm">
 						if post.Published.Valid {
 							{ post.Published.Time.Format("January 2, 2006") }

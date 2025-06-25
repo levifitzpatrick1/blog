@@ -14,11 +14,11 @@
 @layer components {
     .arrow-span {
         display: inline-block;
-        transition: transform 0.2s ease-out;
+        transition: transform 1s ease-out;
     }
 
     .back-button:hover .arrow-span {
-        animation: travel-arrow 0.2s linear infinite;
+        animation: travel-arrow 1s linear infinite;
     }
 }
 
@@ -39,3 +39,26 @@
         opacity: 1;
     }
 }
+
+.post-card {
+  transition: transform 0.5s ease, opacity 0.5s ease, scale 0.5s ease;
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.post-card.htmx-added {
+  animation: slideInFromBottom 0.5s ease-out;
+}
+
+.post-card.htmx-swapping {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
