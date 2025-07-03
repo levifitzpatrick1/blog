@@ -1,16 +1,10 @@
-package blogPage
+package Pages
 
-import "github.com/levifitzpatrick1/blog/internal/database/generated"
-import "github.com/levifitzpatrick1/blog/web/templates/components"
+import "github.com/levifitzpatrick1/blog/web/templates/components/blog"
 import "github.com/levifitzpatrick1/blog/web/templates/layouts"
+import "github.com/levifitzpatrick1/blog/internal/utils"
 
-type BlogsData struct {
-	Posts       []db.ListPostsRow
-	CurrentSort string
-	CurrentPath string
-}
-
-templ Blogs(data BlogsData) {
+templ Blogs(data utils.BlogsData) {
 	@layouts.Sub("Blog", data.CurrentPath, layouts.HtmxScript()) {
 		<body class="bg-background text-primary">
 			<div class="my-8 flex justify-center px-4">
@@ -28,7 +22,6 @@ templ Blogs(data BlogsData) {
 					/>
 				</div>
 			</div>
-
 			<div id="blogs">
 				@components.PostCardList(data.Posts)
 			</div>

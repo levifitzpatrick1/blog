@@ -1,0 +1,30 @@
+package components
+
+import "github.com/levifitzpatrick1/blog/internal/utils"
+
+templ PostCard(post utils.BlogItem) {
+	<a href={ templ.URL("/blog/" + post.Blog.Slug) }>
+		<div
+			class="post-card group border-border max-w-sm rounded-xl overflow-hidden shadow-xs shadow-black bg-card-background hover:shadow-md hover:shadow-accent-hover transition-shadow duration-300 ease-in-out"
+		>
+			<div class="px-6 py-4">
+				<div class="flex justify-between items-start mb-2">
+					<div class="font-bold text-primary text-lg">{ post.Blog.Title }</div>
+					<div class="text-secondary text-sm">
+						if post.Blog.Published.Valid {
+							{ post.Blog.Published.Time.Format("January 2, 2006") }
+						}
+					</div>
+				</div>
+				<div class="px-2">
+					<hr class="text-secondary"/>
+				</div>
+				<div class="relative h-24 overflow-hidden">
+					<p class="text-secondary text-base">{ post.Blog.Blurb } ...</p>
+					<div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-card-background to-transparent"></div>
+				</div>
+			</div>
+			<div class="px-6 pt-2 pb-4"></div>
+		</div>
+	</a>
+}

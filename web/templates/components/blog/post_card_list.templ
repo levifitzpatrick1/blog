@@ -1,8 +1,8 @@
 package components
 
-import "github.com/levifitzpatrick1/blog/internal/database/generated"
+import "github.com/levifitzpatrick1/blog/internal/utils"
 
-templ PostCardList(posts []db.ListPostsRow) {
+templ PostCardList(posts []utils.BlogItem) {
 	<div class="mx-auto max-w-4xl">
 		<div id="blogs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			for _, post := range posts {

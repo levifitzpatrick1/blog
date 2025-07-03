@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	generatedDB "github.com/levifitzpatrick1/blog/internal/database/generated"
-	"github.com/levifitzpatrick1/blog/internal/markdown"
+	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
 	templates "github.com/levifitzpatrick1/blog/web/templates/Pages/Blogs"
 )
 
@@ -29,7 +29,7 @@ func (h *PostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	post, err := h.Queries.GetPostBySlug(ctx, slug)
+	post, err := h.Queries.GetBlogBySlug(ctx, slug)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			log.Printf("Post with slug '%s' not found.", slug)

@@ -1,0 +1,13 @@
+package components
+
+import "github.com/levifitzpatrick1/blog/internal/database/generated"
+
+templ FrcCardList(projects []db.Frc) {
+	<div>
+		<div id="projects" class="list-group">
+			for _, p := range projects {
+				@FrcCard(p)
+			}
+		</div>
+	</div>
+}

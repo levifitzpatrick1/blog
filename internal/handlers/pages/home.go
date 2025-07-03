@@ -5,17 +5,16 @@ import (
 	"log"
 	"net/http"
 
-	generatedDB "github.com/levifitzpatrick1/blog/internal/database/generated"
-	pages "github.com/levifitzpatrick1/blog/web/templates/Pages/Home"
-	templates "github.com/levifitzpatrick1/blog/web/templates/Pages/Home"
+	db "github.com/levifitzpatrick1/blog/internal/database/generated"
+	Pages "github.com/levifitzpatrick1/blog/web/templates/Pages/Home"
 )
 
 type HomeHandler struct {
-	Queries *generatedDB.Queries
+	Queries *db.Queries
 	Logger  *log.Logger
 }
 
-func NewHomeHandler(q *generatedDB.Queries, l *log.Logger) *HomeHandler {
+func NewHomeHandler(q *db.Queries, l *log.Logger) *HomeHandler {
 	return &HomeHandler{Queries: q, Logger: l}
 }
 
@@ -27,14 +26,14 @@ func (h *HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if err != sql.ErrNoRows {
 			h.Logger.Printf("Error fetching latest post: %v", err)
 		}
-		latestPost = generatedDB.GetLatestPostRow{}
+		latestPost = db.GetLatestPostRow{}
 	}
 
-	pageData := pages.HomeData{
+	pageData := Pages.HomeData{
 		LatestPost: latestPost,
 	}
 
-	err = templates.Home(pageData).Render(r.Context(), w)
+	err = Pages.Home(pageData).Render(r.Context(), w)
 	if err != nil {
 		h.Logger.Printf("Error rendering home page: %v", err)
 		http.Error(w, "Failed to render home page", http.StatusInternalServerError)

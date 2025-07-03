@@ -8,11 +8,41 @@ import (
 	"database/sql"
 )
 
-type Post struct {
+type Blog struct {
 	ID        int64
 	Title     string
 	Slug      string
+	Blurb     string
 	Content   string
 	Published sql.NullTime
 	Updated   sql.NullTime
+}
+
+type Frc struct {
+	ID           int64
+	Name         string
+	Slug         string
+	Script       string
+	Presentation string
+	Description  string
+	Video        string
+	Image        string
+	Created      sql.NullTime
+	Updated      sql.NullTime
+}
+
+type Tag struct {
+	ID    int64
+	Name  string
+	Color string
+}
+
+type TagsBlog struct {
+	BlogID int64
+	TagID  int64
+}
+
+type TagsFrc struct {
+	FrcID int64
+	TagID int64
 }
