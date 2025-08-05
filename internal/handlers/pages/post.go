@@ -1,68 +1,46 @@
 package handlers
 
 import (
-	"database/sql"
-	"html/template"
 	"log"
 	"net/http"
 	"strings"
 
-	generatedDB "github.com/levifitzpatrick1/blog/internal/database/generated"
-	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
-	templates "github.com/levifitzpatrick1/blog/web/templates/Pages/Blogs"
+	"github.com/levifitzpatrick1/blog/internal/utils"
+	blogs "github.com/levifitzpatrick1/blog/web/templates/Pages/Blogs"
 )
 
 type PostHandler struct {
-	Queries *generatedDB.Queries
-	Logger  *log.Logger
+	Posts  []utils.Post
+	Logger *log.Logger
 }
 
-func NewPostHandler(q *generatedDB.Queries, l *log.Logger) *PostHandler {
-	return &PostHandler{Queries: q, Logger: l}
+func NewPostHandler(posts []utils.Post, l *log.Logger) *PostHandler {
+	return &PostHandler{Posts: posts, Logger: l}
 }
 
 func (h *PostHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
 	slug := strings.TrimPrefix(r.URL.Path, "/blog/")
 	if slug == "" {
 		http.NotFound(w, r)
 		return
 	}
 
-	post, err := h.Queries.GetBlogBySlug(ctx, slug)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Printf("Post with slug '%s' not found.", slug)
-			http.NotFound(w, r)
-			return
+	var foundPost *utils.Post
+	for i := range h.Posts {
+		if h.Posts[i].Slug == slug {
+			foundPost = &h.Posts[i]
+			break
 		}
-		log.Printf("Error fetching post with slug '%s': %v", slug, err)
-		http.Error(w, "Error fetching post", http.StatusInternalServerError)
+	}
+
+	if foundPost == nil {
+		log.Printf("Post with slug '%s' not found.", slug)
+		http.NotFound(w, r)
 		return
 	}
 
-	renderedHTMLContent, err := markdown.RenderHTML(post.Content)
-	if err != nil {
-		log.Printf("Error rendering markdown as HTML: %v", err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	publishDate := post.Published.Time.Format("01/02/2006")
-	updateDate := post.Updated.Time.Format("01/02/2006")
-	showUpdate := publishDate != updateDate
-
-	pageData := templates.PostPageData{
-		Title:          post.Title,
-		HTMLContent:    template.HTML(renderedHTMLContent),
-		PublishDate:    publishDate,
-		UpdateDate:     updateDate,
-		ShowUpdateDate: showUpdate,
-	}
-
-	// Render the templ component
-	component := templates.PostPage(pageData)
-	err = component.Render(ctx, w)
+	component := blogs.PostPage(*foundPost)
+	err := component.Render(r.Context(), w)
 	if err != nil {
 		h.Logger.Print("Error rendering template: ", err)
 		http.Error(w, "Failed to render page.", http.StatusInternalServerError)

@@ -1,39 +1,29 @@
 package handlers
 
 import (
-	"database/sql"
 	"log"
 	"net/http"
 
-	db "github.com/levifitzpatrick1/blog/internal/database/generated"
-	Pages "github.com/levifitzpatrick1/blog/web/templates/Pages/Home"
+	"github.com/levifitzpatrick1/blog/internal/utils"
+	home "github.com/levifitzpatrick1/blog/web/templates/Pages/Home"
 )
 
 type HomeHandler struct {
-	Queries *db.Queries
-	Logger  *log.Logger
+	Posts  []utils.Post
+	Logger *log.Logger
 }
 
-func NewHomeHandler(q *db.Queries, l *log.Logger) *HomeHandler {
-	return &HomeHandler{Queries: q, Logger: l}
+func NewHomeHandler(posts []utils.Post, l *log.Logger) *HomeHandler {
+	return &HomeHandler{Posts: posts, Logger: l}
 }
 
 func (h *HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	latestPost, err := h.Queries.GetLatestPost(ctx)
-	if err != nil {
-		if err != sql.ErrNoRows {
-			h.Logger.Printf("Error fetching latest post: %v", err)
-		}
-		latestPost = db.GetLatestPostRow{}
+	var latestPost utils.Post
+	if len(h.Posts) > 0 {
+		latestPost = h.Posts[0]
 	}
 
-	pageData := Pages.HomeData{
-		LatestPost: latestPost,
-	}
-
-	err = Pages.Home(pageData).Render(r.Context(), w)
+	err := home.Home(latestPost).Render(r.Context(), w)
 	if err != nil {
 		h.Logger.Printf("Error rendering home page: %v", err)
 		http.Error(w, "Failed to render home page", http.StatusInternalServerError)

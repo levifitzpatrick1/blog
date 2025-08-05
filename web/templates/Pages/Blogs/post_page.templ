@@ -1,16 +1,8 @@
-package Pages
+package blogs
 
-import "html/template"
+import "github.com/levifitzpatrick1/blog/internal/utils"
 
-type PostPageData struct {
-	Title          string
-	HTMLContent    template.HTML
-	PublishDate    string
-	UpdateDate     string
-	ShowUpdateDate bool
-}
-
-templ PostPage(data PostPageData) {
+templ PostPage(data utils.Post) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -30,12 +22,8 @@ templ PostPage(data PostPageData) {
 						{ data.Title }
 					</h1>
 					<p class="text-sm text-secondary">
-						Levi Fitzpatrick | Published: { data.PublishDate }
-						if data.ShowUpdateDate {
-							<span class="italic text-secondary">
-								* Updated: { data.UpdateDate }
-							</span>
-						}
+						Levi Fitzpatrick | Published: { data.CreateDate.Format("January 6, 2006") }
+						*{ data.ModifyDate.Format("January 6, 2006") }
 					</p>
 				</div>
 				<article class="text-primary prose lg:prose-xl max-w-none">

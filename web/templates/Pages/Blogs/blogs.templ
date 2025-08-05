@@ -1,11 +1,11 @@
-package Pages
+package blogs
 
-import "github.com/levifitzpatrick1/blog/web/templates/components/blog"
 import "github.com/levifitzpatrick1/blog/web/templates/layouts"
 import "github.com/levifitzpatrick1/blog/internal/utils"
+import "github.com/levifitzpatrick1/blog/web/templates/components/blog"
 
-templ Blogs(data utils.BlogsData) {
-	@layouts.Sub("Blog", data.CurrentPath, layouts.HtmxScript()) {
+templ Blogs(data []utils.Post) {
+	@layouts.Sub("Blog", "/blog", layouts.HtmxScript()) {
 		<body class="bg-background text-primary">
 			<div class="my-8 flex justify-center px-4">
 				<div class="w-full mx-auto md:w-2/3 lg:w-1/2">
@@ -23,7 +23,7 @@ templ Blogs(data utils.BlogsData) {
 				</div>
 			</div>
 			<div id="blogs">
-				@components.PostCardList(data.Posts)
+				@blog.PostCardList(data)
 			</div>
 		</body>
 	}

@@ -1,13 +1,9 @@
-package Pages
+package home
 
 import "github.com/levifitzpatrick1/blog/web/templates/layouts"
-import "github.com/levifitzpatrick1/blog/internal/database/generated"
+import "github.com/levifitzpatrick1/blog/internal/utils"
 
-type HomeData struct {
-	LatestPost db.GetLatestPostRow
-}
-
-templ Home(data HomeData) {
+templ Home(latestPost utils.Post) {
 	@layouts.Base("Levi Fitzpatrick - Portfolio") {
 		<div class="w-full min-h-screen">
 			<div class="text-center pt-12 pb-16 sm:pt-16 sm:pb-20">
@@ -47,10 +43,10 @@ templ Home(data HomeData) {
 				</div>
 			</div>
 			<div class="text-center py-12">
-				if data.LatestPost.Title != "" {
+				if latestPost.Title != "" {
 					<h2 class="text-2xl font-bold text-primary mb-2">Latest Post</h2>
-					<a href={ templ.URL("/blog/" + data.LatestPost.Slug) } class="text-xl text-accent hover:underline">
-						{ data.LatestPost.Title }
+					<a href={ templ.URL("/blog/" + latestPost.Slug) } class="text-xl text-accent hover:underline">
+						{ latestPost.Blurb }
 					</a>
 				}
 			</div>
