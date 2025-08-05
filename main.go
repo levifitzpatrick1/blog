@@ -29,7 +29,7 @@ func main() {
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime|log.Lshortfile)
 
-	posts, err := loadPosts("Blog Markdowns/Blog", logger)
+	posts, err := loadPosts("BlogMarkdowns/Blog", logger)
 	if err != nil {
 		logger.Fatalf("Failed to load posts: %v", err)
 	}
