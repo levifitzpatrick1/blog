@@ -25,7 +25,11 @@ type Site struct {
 }
 
 func main() {
-	addr := ":4000"
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "4000"
+	}
+	addr := ":" + port
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime|log.Lshortfile)
 
