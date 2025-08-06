@@ -3,7 +3,7 @@ title: "Creating A Blog Site: A Journey of Go, TailwindCSS and HTMX"
 slug: "creating-a-blog-site-go-tailwind-htmx"
 blurb: "An explanation of my motivations when making this site and struggles with the technology."
 date: 2025-08-04
-modifieddate: 2025-08-05
+modifieddate: 2025-08-06
 tags:
   - go
   - tailwind

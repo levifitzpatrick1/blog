@@ -22,9 +22,9 @@ templ PostPage(data utils.Post) {
 						{ data.Title }
 					</h1>
 					<p class="text-sm text-secondary">
-						Levi Fitzpatrick | Published: { data.CreateDate.Format("January 6, 2006") }
+						Levi Fitzpatrick | Published: { data.CreateDate.Format("January 2, 2006") }
 						if !data.ModifyDate.IsZero() && !data.ModifyDate.Equal(data.CreateDate) {
-							Modified: { data.ModifyDate.Format("January 6, 2006") }
+							Modified: { data.ModifyDate.Format("January 2, 2006") }
 						}
 					</p>
 				</div>

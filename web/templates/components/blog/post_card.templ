@@ -7,6 +7,11 @@ templ PostCard(post utils.Post) {
 		<div
 			class="post-card group border-border max-w-md rounded-xl overflow-hidden shadow-xs shadow-black bg-card-background hover:shadow-md hover:shadow-accent-hover transition-shadow duration-300 ease-in-out"
 		>
+			for _, tag := range post.Tags {
+				<div>
+					{ tag.Name }
+				</div>
+			}
 			<div class="px-6 py-4">
 				<div class="flex justify-between items-start mb-2">
 					<div class="font-bold text-primary text-lg">{ post.Title }</div>
