@@ -16,7 +16,6 @@ import (
 	"github.com/levifitzpatrick1/blog/internal/utils"
 	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
 	"gopkg.in/yaml.v3"
-	_ "modernc.org/sqlite"
 )
 
 type Site struct {
@@ -101,6 +100,8 @@ func loadPosts(dir string, logger *log.Logger) ([]utils.Post, error) {
 			post.CreateDate = tmpPost.CreateDate
 			post.ModifyDate = tmpPost.ModifyDate
 			post.Content = string(parts[2])
+
+			logger.Println(tmpPost.ModifyDate)
 
 			post.GetTags(tmpPost.Tags)
 

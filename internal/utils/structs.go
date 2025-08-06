@@ -15,7 +15,7 @@ type TempPost struct {
 	Slug       string    `yaml:"slug"`
 	Blurb      string    `yaml:"blurb"`
 	CreateDate time.Time `yaml:"date"`
-	ModifyDate time.Time `yaml:"modifydate"`
+	ModifyDate time.Time `yaml:"modifieddate"`
 	Tags       []string  `yaml:"tags"`
 }
 
