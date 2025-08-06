@@ -44,7 +44,7 @@ func PostCard(post utils.Post) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><div class=\"post-card group border-border max-w-sm rounded-xl overflow-hidden shadow-xs shadow-black bg-card-background hover:shadow-md hover:shadow-accent-hover transition-shadow duration-300 ease-in-out\"><div class=\"px-6 py-4\"><div class=\"flex justify-between items-start mb-2\"><div class=\"font-bold text-primary text-lg\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><div class=\"post-card group border-border max-w-md rounded-xl overflow-hidden shadow-xs shadow-black bg-card-background hover:shadow-md hover:shadow-accent-hover transition-shadow duration-300 ease-in-out\"><div class=\"px-6 py-4\"><div class=\"flex justify-between items-start mb-2\"><div class=\"font-bold text-primary text-lg\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

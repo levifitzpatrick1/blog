@@ -1,7 +1,7 @@
 ---
 title: "Creating A Blog Site: A Journey of Go, TailwindCSS and HTMX"
 slug: "creating-a-blog-site-go-tailwind-htmx"
-blurb: "My journey into web development, starting from a hardware-focused background and building a personal site with modern tools."
+blurb: "An explanation of my motivations when making this site and struggles with the technology."
 date: 2025-08-04
 modifieddate: 2025-08-05
 tags:

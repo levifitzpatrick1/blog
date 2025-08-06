@@ -44,7 +44,7 @@ func Home(latestPost utils.Post) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full min-h-screen\"><div class=\"text-center pt-12 pb-16 sm:pt-16 sm:pb-20\"><h1 class=\"text-5xl font-bold mb-8\">Levi Fitzpatrick</h1><div class=\"flex flex-col sm:flex-row justify-center gap-4\"><a href=\"/frc\" class=\"bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent-hover transition-colors duration-300\">FRC Projects</a> <a href=\"/blog\" class=\"bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent-hover transition-colors duration-300\">Blog</a> <a href=\"/resume\" class=\"bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent-hover transition-colors duration-300\">Resume</a></div></div><div class=\"relative flex flex-col md:flex-row justify-center items-start md:items-center px-4 pb-12\"><div class=\"bg-card-background rounded-3xl shadow-2xl p-3 w-full max-w-md md:w-[26rem] md:h-[34rem] z-10\"><div class=\"w-full h-full\"><img src=\"/static/assets/me.jpg\" alt=\"A picture of Levi Fitzpatrick\" class=\"w-full h-full object-cover rounded-2xl\"></div></div><div class=\"bg-card-background rounded-3xl shadow-2xl p-8 w-full max-w-md md:w-[26rem] md:h-[34rem] z-20 -mt-24 md:mt-24 md:-ml-16 flex items-center\"><p class=\"text-secondary text-xl\">I am Levi Fitzpatrick. This site is a place for me to store posts about projects and Ideas that I have, and are currently, working on. Many of the posts here will end up being related to designing FRC Robots both in mechanical and software scopes. I am currently a lead mentor of FRC Team 2064 Panther Project, mainly filling the role of sofware engineer mentor. This stems from my career choice of a mechanical engineer masquarading as a software engineer.</p></div></div><div class=\"text-center py-12\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full min-h-screen\"><div class=\"text-center pt-12 pb-16 sm:pt-16 sm:pb-20\"><h1 class=\"text-5xl font-bold mb-8\">Levi Fitzpatrick</h1><div class=\"flex flex-col sm:flex-row justify-center gap-4\"><a href=\"/frc\" class=\"bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent-hover transition-colors duration-300\">FRC</a> <a href=\"/blog\" class=\"bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent-hover transition-colors duration-300\">Blog</a></div></div><div class=\"relative flex flex-col md:flex-row justify-center items-start md:items-center px-4 pb-12\"><div class=\"bg-card-background rounded-3xl shadow-2xl p-3 w-full max-w-md md:w-[26rem] md:h-[34rem] z-10\"><div class=\"w-full h-full\"><img src=\"/static/assets/me.jpg\" alt=\"A picture of Levi Fitzpatrick\" class=\"w-full h-full object-cover rounded-2xl\"></div></div><div class=\"bg-card-background rounded-3xl shadow-2xl p-8 w-full max-w-md md:w-[26rem] md:h-[34rem] z-20 -mt-24 md:mt-24 md:-ml-16 flex items-center\"><p class=\"text-secondary text-xl\">I am Levi Fitzpatrick. This site is a place for me to store posts about projects and Ideas that I have, and are currently, working on. Many of the posts here will end up being related to designing FRC Robots both in mechanical and software scopes. I am currently a lead mentor of FRC Team 2064 Panther Project, mainly filling the role of sofware engineer mentor. This stems from my career choice of a mechanical engineer masquarading as a software engineer.</p></div></div><div class=\"text-center py-12\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -56,7 +56,7 @@ func Home(latestPost utils.Post) templ.Component {
 				var templ_7745c5c3_Var3 templ.SafeURL
 				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL("/blog/" + latestPost.Slug))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 48, Col: 52}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 45, Col: 52}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 				if templ_7745c5c3_Err != nil {
@@ -69,7 +69,7 @@ func Home(latestPost utils.Post) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(latestPost.Blurb)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 49, Col: 24}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 46, Col: 24}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {

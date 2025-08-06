@@ -27,7 +27,7 @@ func (h *SearchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		filteredPosts = h.Posts
 	} else {
 		for _, post := range h.Posts {
-			if strings.Contains(strings.ToLower(post.Title), query) || strings.Contains(strings.ToLower(post.Content), query) {
+			if strings.Contains(strings.ToLower(post.Title), query) {
 				filteredPosts = append(filteredPosts, post)
 			}
 		}

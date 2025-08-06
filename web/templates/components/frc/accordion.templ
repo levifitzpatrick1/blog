@@ -1,0 +1,45 @@
+package frc
+
+type AccordionItem struct {
+	Title   string
+	Content templ.Component
+}
+
+templ Accordion(items []AccordionItem) {
+	// x-data initializes Alpine state. 'openItem' will track the index of the open accordion item.
+	<div x-data="{ openItem: null }" class="space-y-2">
+		for i, item := range items {
+			// Pass the index 'i' into the item component
+			@AccordionItemComponent(item, i)
+		}
+	</div>
+}
+
+templ AccordionItemComponent(item AccordionItem, index int) {
+	<div class="border rounded-lg">
+		<h2>
+			<button
+				@click="openItem = openItem === index ? null : index"
+				type="button"
+				class="flex items-center justify-between w-full p-4 font-medium text-left"
+				:aria-expanded="openItem === index"
+			>
+				<span>{ item.Title }</span>
+				<svg
+					class="w-3 h-3 shrink-0 transition-transform duration-200"
+					:class="{ 'rotate-180': openItem === index }"
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 10 6"
+				>
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"></path>
+				</svg>
+			</button>
+		</h2>
+		<div x-show="openItem === index" x-collapse>
+			<div class="p-4 border-t">
+				@item.Content
+			</div>
+		</div>
+	</div>
+}

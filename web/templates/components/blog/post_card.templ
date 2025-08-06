@@ -5,7 +5,7 @@ import "github.com/levifitzpatrick1/blog/internal/utils"
 templ PostCard(post utils.Post) {
 	<a href={ templ.URL("/blog/" + post.Slug) }>
 		<div
-			class="post-card group border-border max-w-sm rounded-xl overflow-hidden shadow-xs shadow-black bg-card-background hover:shadow-md hover:shadow-accent-hover transition-shadow duration-300 ease-in-out"
+			class="post-card group border-border max-w-md rounded-xl overflow-hidden shadow-xs shadow-black bg-card-background hover:shadow-md hover:shadow-accent-hover transition-shadow duration-300 ease-in-out"
 		>
 			<div class="px-6 py-4">
 				<div class="flex justify-between items-start mb-2">
