@@ -1,6 +1,9 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
+@layer base {
+  :root {
     --color-background: #191919;
     --color-card-background: #202020;
     --color-primary: #fcfcfd;
@@ -9,60 +12,61 @@
 
     --color-accent: #06b6d4;
     --color-accent-hover: #0891b2;
+  }
 }
 
 @layer components {
-    .arrow-span {
-        display: inline-block;
-        transition: transform 1s ease-out;
-    }
+  .arrow-span {
+    display: inline-block;
+    transition: transform 1s ease-out;
+  }
 
-    .back-button:hover .arrow-span {
-        animation: travel-arrow 1s linear infinite;
-    }
+  .back-button:hover .arrow-span {
+    animation: travel-arrow 1s linear infinite;
+  }
 }
 
 @keyframes travel-arrow {
-    0% {
-        transform: translateX(0);
-    }
-    40% {
-        transform: translateX(-60%);
-        opacity: 0;
-    }
-    60% {
-        transform: translateX(60%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-60%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(60%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .post-card {
-    transition:
-        transform 0.5s ease,
-        opacity 0.5s ease,
-        scale 0.5s ease;
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease,
+    scale 0.5s ease;
 }
 
 @keyframes slideInFromBottom {
-    from {
-        opacity: 0;
-        transform: translateY(50px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .post-card.htmx-added {
-    animation: slideInFromBottom 0.5s ease-out;
+  animation: slideInFromBottom 0.5s ease-out;
 }
 
 .post-card.htmx-swapping {
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
 }
