@@ -1,0 +1,41 @@
+package home
+
+templ ContactButton() {
+	<div class="contact-links">
+		<div class="md">
+			<a
+				href="https://github.com/levifitzpatrick1"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Github
+			</a>
+		</div>
+		<div
+			x-data="{ feedback: 'Personal Email: levifitzpatrick1@gmail.com' }"
+		>
+			<button
+				x-on:click="
+									navigator.clipboard.writeText('levifitzpatrick1@gmail.com');
+									feedback = 'Copied!';
+									setTimeout(() => { feedback = 'Personal Email: levifitzpatrick1@gmail.com' }, 2000);
+								"
+				class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
+			>
+				<span x-text="feedback"></span>
+			</button>
+		</div>
+	</div>
+	<div x-data="{ feedback: 'FRC Email: levi@2064.team' }">
+		<button
+			x-on:click="
+				navigator.clipboard.writeText('levi@2064.team');
+				feedback = 'Copied!';
+				setTimeout(() => { feedback = 'FRC Email: levi@2064.team' }, 2000);
+			"
+			class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 transition-colors"
+		>
+			<span x-text="feedback"></span>
+		</button>
+	</div>
+}

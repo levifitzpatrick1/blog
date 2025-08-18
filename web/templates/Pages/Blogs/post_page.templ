@@ -28,7 +28,11 @@ templ PostPage(data utils.Post) {
 						}
 					</p>
 				</div>
-				<article class="text-primary prose lg:prose-xl max-w-none">
+				<div class="prose prose-invert">
+					<h3>Kill me</h3>
+					<p>Some paragraph text.</p>
+				</div>
+				<article class="prose">
 					@templ.Raw(data.HTMLContent)
 				</article>
 			</div>

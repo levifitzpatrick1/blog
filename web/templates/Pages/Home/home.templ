@@ -2,12 +2,14 @@ package home
 
 import "github.com/levifitzpatrick1/blog/web/templates/layouts"
 import "github.com/levifitzpatrick1/blog/internal/utils"
+import "github.com/levifitzpatrick1/blog/web/templates/components/home"
 
 templ Home(latestPost utils.Post) {
 	@layouts.Base("Levi Fitzpatrick - Portfolio") {
+		@home.ContactButton()
 		<div class="w-full min-h-screen">
 			<div class="text-center pt-12 pb-16 sm:pt-16 sm:pb-20">
-				<h1 class="text-5xl font-bold mb-8">Levi Fitzpatrick</h1>
+				<h1 class="text-5xl text-white font-bold mb-8">Levi Fitzpatrick</h1>
 				<div class="flex flex-col sm:flex-row justify-center gap-4">
 					<a href="/frc" class="bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent-hover transition-colors duration-300">
 						FRC
