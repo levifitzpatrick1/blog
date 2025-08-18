@@ -53,7 +53,6 @@ func LoadPosts(dir string, logger *log.Logger) ([]utils.Post, error) {
 			post.HTMLContent = template.HTML(rendered)
 
 			posts = append(posts, post)
-			logger.Printf("Loaded post: %s", post.Title)
 		}
 		return nil
 	})

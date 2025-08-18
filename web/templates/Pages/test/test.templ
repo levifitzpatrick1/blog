@@ -1,7 +1,11 @@
 package test
 
+import "github.com/levifitzpatrick1/blog/web/templates/layouts"
+
 templ TestPage() {
-	<div class="bg-white text-red-400">
-		some text here
-	</div>
+	@layouts.Base("Test Page") {
+		<div class="bg-white text-red-400">
+			some text here
+		</div>
+	}
 }
