@@ -1,6 +1,6 @@
 module github.com/levifitzpatrick1/blog
 
-go 1.24.1
+go 1.25.0
 
 require (
 	github.com/a-h/templ v0.3.943
