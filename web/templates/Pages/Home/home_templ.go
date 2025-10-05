@@ -49,38 +49,38 @@ func Home(latestPost utils.Post) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, " <div class=\"w-full min-h-screen\"><div class=\"text-center pt-12 pb-16 sm:pt-16 sm:pb-20\"><h1 class=\"text-5xl text-white font-bold mb-8\">Levi Fitzpatrick</h1><div class=\"flex flex-col sm:flex-row justify-center gap-4\"><a href=\"/frc\" class=\"bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent-hover transition-colors duration-300\">FRC</a> <a href=\"/blog\" class=\"bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent-hover transition-colors duration-300\">Blog</a></div></div><div class=\"relative flex flex-col md:flex-row justify-center items-start md:items-center px-4 pb-12\"><div class=\"bg-card-background rounded-3xl shadow-2xl p-3 w-full max-w-md md:w-[26rem] md:h-[34rem] z-10\"><div class=\"w-full h-full\"><img src=\"/static/assets/me.jpg\" alt=\"A picture of Levi Fitzpatrick\" class=\"w-full h-full object-cover rounded-2xl\"></div></div><div class=\"bg-card-background rounded-3xl shadow-2xl p-8 w-full max-w-md md:w-[26rem] md:h-[34rem] z-20 -mt-24 md:mt-24 md:-ml-16 flex items-center\"><p class=\"text-secondary text-xl\">I am Levi Fitzpatrick. This site is a place for me to store posts about projects and Ideas that I have, and are currently, working on. Many of the posts here will end up being related to designing FRC Robots both in mechanical and software scopes. I am currently a lead mentor of FRC Team 2064 Panther Project, mainly filling the role of sofware engineer mentor. This stems from my career choice of a mechanical engineer masquarading as a software engineer.</p></div></div><div class=\"text-center py-12\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, " <div class=\"w-full min-h-screen\"><div class=\"text-center pt-12 pb-16 sm:pt-16 sm:pb-20\" x-data=\"{ show: false }\" x-init=\"setTimeout(() => show = true, 200)\"><h1 class=\"text-5xl md:text-6xl text-white font-bold mb-8 bg-gradient-to-r from-accent via-accent-hover to-accent-dark bg-clip-text text-transparent\" x-show=\"show\" x-transition:enter=\"transition ease-out duration-700\" x-transition:enter-start=\"opacity-0 transform translate-y-8\" x-transition:enter-end=\"opacity-100 transform translate-y-0\">Levi Fitzpatrick</h1><div class=\"flex flex-col sm:flex-row justify-center gap-4\" x-show=\"show\" x-transition:enter=\"transition ease-out duration-700 delay-200\" x-transition:enter-start=\"opacity-0 transform translate-y-8\" x-transition:enter-end=\"opacity-100 transform translate-y-0\"><a href=\"/frc\" class=\"btn-material gradient-accent text-white font-bold py-4 px-10 rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1\" x-data @mouseenter=\"$el.style.transform = 'translateY(-4px) scale(1.05)'\" @mouseleave=\"$el.style.transform = 'translateY(0) scale(1)'\">FRC</a> <a href=\"/blog\" class=\"btn-material gradient-accent text-white font-bold py-4 px-10 rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1\" x-data @mouseenter=\"$el.style.transform = 'translateY(-4px) scale(1.05)'\" @mouseleave=\"$el.style.transform = 'translateY(0) scale(1)'\">Blog</a></div></div><div class=\"relative flex flex-col md:flex-row justify-center items-start md:items-center px-4 pb-12\" x-data=\"{ cardsVisible: false }\" x-init=\"setTimeout(() => cardsVisible = true, 400)\"><div class=\"material-card p-3 w-full max-w-md md:w-[26rem] md:h-[34rem] z-10\" x-show=\"cardsVisible\" x-transition:enter=\"transition ease-out duration-700\" x-transition:enter-start=\"opacity-0 transform translate-x-20 scale-95\" x-transition:enter-end=\"opacity-100 transform translate-x-0 scale-100\"><div class=\"w-full h-full relative overflow-hidden rounded-xl\"><div class=\"absolute inset-0 gradient-accent-subtle opacity-50\"></div><img src=\"/static/assets/me.jpg\" alt=\"A picture of Levi Fitzpatrick\" class=\"w-full h-full object-cover rounded-xl relative z-10\"></div></div><div class=\"material-card p-8 w-full max-w-md md:w-[26rem] md:h-[34rem] z-20 -mt-24 md:mt-24 md:-ml-16 flex items-center relative overflow-hidden\" x-show=\"cardsVisible\" x-transition:enter=\"transition ease-out duration-700 delay-300\" x-transition:enter-start=\"opacity-0 transform translate-x-20 scale-95\" x-transition:enter-end=\"opacity-100 transform translate-x-0 scale-100\"><div class=\"absolute top-0 right-0 w-32 h-32 gradient-accent opacity-10 blur-3xl rounded-full\"></div><div class=\"absolute bottom-0 left-0 w-32 h-32 gradient-accent opacity-10 blur-3xl rounded-full\"></div><p class=\"text-secondary text-xl leading-relaxed relative z-10\">I am Levi Fitzpatrick. This site is a place for me to store posts about projects and Ideas that I have, and are currently, working on. Many of the posts here will end up being related to designing FRC Robots both in mechanical and software scopes. I am currently a lead mentor of FRC Team 2064 Panther Project, mainly filling the role of sofware engineer mentor. This stems from my career choice of a mechanical engineer masquarading as a software engineer.</p></div></div><div class=\"text-center py-12 px-4\" x-data=\"{ postVisible: false }\" x-init=\"setTimeout(() => postVisible = true, 800)\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			if latestPost.Title != "" {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<h2 class=\"text-2xl font-bold text-primary mb-2\">Latest Post</h2><a href=\"")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div x-show=\"postVisible\" x-transition:enter=\"transition ease-out duration-700\" x-transition:enter-start=\"opacity-0 transform translate-y-8\" x-transition:enter-end=\"opacity-100 transform translate-y-0\" class=\"max-w-2xl mx-auto\"><h2 class=\"text-2xl font-bold text-primary mb-4\">Latest Post</h2><a href=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var3 templ.SafeURL
 				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL("/blog/" + latestPost.Slug))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 47, Col: 52}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 104, Col: 51}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" class=\"text-xl text-accent hover:underline\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" class=\"block group\"><p class=\"text-xl text-gradient truncate-3-lines hover:text-accent transition-all duration-300\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(latestPost.Blurb)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 48, Col: 24}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 108, Col: 26}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</a>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</p></a></div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
