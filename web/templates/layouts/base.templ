@@ -5,19 +5,34 @@ templ Base(title string, scripts ...templ.Component) {
 	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>{ title }</title>
 			<link href="/static/css/style.css" rel="stylesheet"/>
+			<script src="https://unpkg.com/htmx.org@2.0.4" crossorigin="anonymous"></script>
+			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 			for _, s := range scripts {
 				@s
 			}
-			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		</head>
-		<body class="bg-background text-primary">
-			{ children... }
+		<body class="bg-background text-primary" x-data="{ loaded: false }" x-init="setTimeout(() => loaded = true, 100)">
+			<div x-show="loaded" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+				{ children... }
+			</div>
 		</body>
 	</html>
 }
 
 templ HtmxScript() {
 	<script src="https://unpkg.com/htmx.org@2.0.4" crossorigin="anonymous"></script>
+	<script>
+		(function () {
+			function addLoading() { document.documentElement.classList.add('htmx-loading'); }
+			function removeLoading() { document.documentElement.classList.remove('htmx-loading'); }
+
+			document.body.addEventListener('htmx:beforeRequest', function () { addLoading(); });
+			document.body.addEventListener('htmx:afterRequest', function () { removeLoading(); });
+			document.body.addEventListener('htmx:beforeSwap', function (evt) { });
+			document.body.addEventListener('htmx:afterSwap', function (evt) { });
+		})();
+	</script>
 }
