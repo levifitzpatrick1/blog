@@ -35,11 +35,6 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .material-card:hover {
-    box-shadow: var(--shadow-elevation-4);
-    transform: translateY(-4px);
-  }
-
   .gradient-accent {
     background: linear-gradient(
       135deg,
@@ -71,11 +66,6 @@
     box-shadow: var(--shadow-elevation-2);
   }
 
-  .btn-material:hover {
-    box-shadow: var(--shadow-elevation-3);
-    transform: translateY(-2px);
-  }
-
   .btn-material:active {
     box-shadow: var(--shadow-elevation-1);
     transform: translateY(0);
@@ -94,11 +84,6 @@
     transition:
       width 0.6s,
       height 0.6s;
-  }
-
-  .btn-material:hover::before {
-    width: 300px;
-    height: 300px;
   }
 
   .arrow-span {
@@ -142,7 +127,6 @@
   }
 
   .nav-material {
-    backdrop-filter: blur(10px);
     background: rgba(26, 26, 26, 0.9);
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-elevation-1);
@@ -164,6 +148,7 @@
   .truncate-3-lines {
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

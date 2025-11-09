@@ -1,0 +1,13 @@
+package frc
+
+import "github.com/levifitzpatrick1/blog/web/templates/layouts"
+import "github.com/levifitzpatrick1/blog/web/templates/components/frc"
+
+templ Frc() {
+	@layouts.Sub("Frc", "/frc", layouts.HtmxScript()) {
+		@frc.Accordion([]frc.AccordionItem{})
+		<div>
+			frc stuff here
+		</div>
+	}
+}

@@ -15,6 +15,8 @@ templ Sub(title, currentPath string, scripts ...templ.Component) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>{ title }</title>
 			<link href="/static/css/style.css" rel="stylesheet"/>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 			<script src="https://unpkg.com/htmx.org@2.0.4" crossorigin="anonymous"></script>
 			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 			for _, s := range scripts {
@@ -28,7 +30,7 @@ templ Sub(title, currentPath string, scripts ...templ.Component) {
 						<div class="flex-shrink-0">
 							<a
 								href="/"
-								class="text-2xl font-bold text-gradient hover:scale-105 transform transition-transform duration-300"
+								class="text-2xl font-bold text-gradient transition-transform duration-300"
 							>
 								Levi Fitzpatrick
 							</a>
@@ -40,13 +42,11 @@ templ Sub(title, currentPath string, scripts ...templ.Component) {
 						<div class="md:hidden">
 							<button
 								@click="mobileMenuOpen = !mobileMenuOpen"
-								class="text-primary hover:text-accent transition-colors p-2"
+								class="text-primary transition-colors p-2"
 								aria-label="Toggle menu"
 							>
-								<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-									<path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-								</svg>
+								<span class="material-symbols-outlined text-2xl leading-none" x-show="!mobileMenuOpen">menu</span>
+								<span class="material-symbols-outlined text-2xl leading-none" x-show="mobileMenuOpen">close</span>
 							</button>
 						</div>
 					</div>
@@ -84,20 +84,17 @@ templ navButton(link NavLink, currentPath string) {
 			isActive = (currentPath == link.Path)
 		}
 
-		baseClasses := "btn-material relative font-bold py-2 px-6 rounded-lg transition-all duration-300"
+		baseClasses := "relative font-bold py-2 px-6 rounded-md transition-all duration-300"
 		var stateClasses string
 		if isActive {
-			stateClasses = "gradient-accent text-white shadow-lg"
+			stateClasses = "gradient-accent text-card-background shadow-lg"
 		} else {
-			stateClasses = "bg-card-background text-accent border-2 border-accent hover:gradient-accent hover:text-white hover:border-transparent"
+			stateClasses = "text-accent hover:ring-2 hover:ring-accent"
 		}
 	}}
 	<a
 		href={ templ.URL(link.Path) }
 		class={ templ.Classes(baseClasses, stateClasses) }
-		x-data
-		@mouseenter="$el.style.transform = 'translateY(-2px) scale(1.05)'"
-		@mouseleave="$el.style.transform = 'translateY(0) scale(1)'"
 	>
 		{ link.Label }
 	</a>
@@ -112,12 +109,12 @@ templ navButtonMobile(link NavLink, currentPath string) {
 			isActive = (currentPath == link.Path)
 		}
 
-		baseClasses := "block w-full text-left font-bold py-3 px-4 rounded-lg transition-all duration-300"
+		baseClasses := "block w-full text-left font-bold py-3 px-4 rounded-full transition-all duration-300"
 		var stateClasses string
 		if isActive {
 			stateClasses = "gradient-accent text-white"
 		} else {
-			stateClasses = "text-accent hover:bg-card-background"
+			stateClasses = "text-accent hover:ring-2 hover:ring-accent"
 		}
 	}}
 	<a

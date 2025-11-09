@@ -10,6 +10,7 @@ templ PostPage(data utils.Post) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>{ data.Title }</title>
 			<link rel="stylesheet" href="/static/css/style.css"/>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 			<script src="https://unpkg.com/htmx.org@2.0.4" crossorigin="anonymous"></script>
 			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		</head>
@@ -36,21 +37,16 @@ templ PostPage(data utils.Post) {
 					>
 						<a
 							href="/blog"
-							class="inline-flex items-center gradient-accent text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
-							x-data
-							@mouseenter="$el.style.transform = 'translateX(-4px)'"
-							@mouseleave="$el.style.transform = 'translateX(0)'"
+							class="inline-flex items-center gradient-accent text-background font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
 						>
-							<svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-							</svg>
+							<span class="material-symbols-outlined text-xl mr-2 transition-transform duration-300 leading-none">arrow_back</span>
 							<span>Back to Blog</span>
 						</a>
 					</div>
 
 					<article class="material-card p-8 sm:p-10 md:p-12 relative overflow-hidden">
-						<div class="absolute top-0 right-0 w-64 h-64 gradient-accent opacity-5 blur-3xl rounded-full"></div>
-						<div class="absolute bottom-0 left-0 w-64 h-64 gradient-accent opacity-5 blur-3xl rounded-full"></div>
+						<div class="absolute top-0 right-0 w-64 h-64 rounded-full"></div>
+						<div class="absolute bottom-0 left-0 w-64 h-64 rounded-full"></div>
 
 						<div
 							class="relative z-10"
@@ -67,35 +63,20 @@ templ PostPage(data utils.Post) {
 								</h1>
 								<div class="flex flex-wrap items-center gap-4 text-secondary">
 									<div class="flex items-center">
-										<svg class="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-										</svg>
+										<span class="material-symbols-outlined text-xl mr-2 text-accent leading-none">person</span>
 										<span class="font-medium">Levi Fitzpatrick</span>
 									</div>
 									<div class="flex items-center">
-										<svg class="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-										</svg>
+										<span class="material-symbols-outlined text-xl mr-2 text-accent leading-none">calendar_today</span>
 										<span>Published: { data.CreateDate.Format("January 2, 2006") }</span>
 									</div>
 									if !data.ModifyDate.IsZero() && !data.ModifyDate.Equal(data.CreateDate) {
 										<div class="flex items-center">
-											<svg class="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-											</svg>
+											<span class="material-symbols-outlined text-xl mr-2 text-accent leading-none">update</span>
 											<span>Modified: { data.ModifyDate.Format("January 2, 2006") }</span>
 										</div>
 									}
 								</div>
-								if len(data.Tags) > 0 {
-									<div class="flex flex-wrap gap-2 mt-6">
-										for _, tag := range data.Tags {
-											<span class="px-4 py-2 text-sm font-semibold rounded-full gradient-accent text-white shadow-lg">
-												{ tag.Name }
-											</span>
-										}
-									</div>
-								}
 							</header>
 						</div>
 
@@ -125,12 +106,10 @@ templ PostPage(data utils.Post) {
 				x-transition:leave="transition ease-in duration-200"
 				x-transition:leave-start="opacity-100 transform translate-y-0 scale-100"
 				x-transition:leave-end="opacity-0 transform translate-y-4 scale-75"
-				class="fixed bottom-8 right-8 gradient-accent text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40"
+				class="fixed bottom-8 right-8 gradient-accent text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40 flex items-center justify-center"
 				aria-label="Scroll to top"
 			>
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-				</svg>
+				<span class="material-symbols-outlined text-xl leading-none">arrow_upward</span>
 			</button>
 		</body>
 	</html>

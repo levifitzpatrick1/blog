@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog/NE Mentors Conference 25 and Talk Like a Robot.md",
+                "file": "Blog/Creating A Blog Site.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "NE Mentors Conference 25 and Talk Like a Robot"
+              "title": "Creating A Blog Site"
             }
           }
         ]
@@ -160,17 +160,28 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "custom-theme-studio:Custom Theme Studio": false
     }
   },
   "active": "b9d9a6637e8f4070",
   "lastOpenFiles": [
-    "Blog/Creating A Blog Site. A journey of Go, TailwindCSS and HTMX.md",
-    "Blog/NE Mentors Conference 25 and Talk Like a Robot.md"
+    "Blog/How Do You Teach Code.md",
+    "Blog/NE Mentors Conference 25 and Talk Like a RobotHw.md",
+    "Untitled.base",
+    "Untitled 2.base",
+    "Untitled 7.base",
+    "Untitled 6.base",
+    "Untitled 5.base",
+    "Untitled 4.base",
+    "Untitled 3.base",
+    "Untitled 1.base",
+    "Blog/Creating A Blog Site.md"
   ]
 }

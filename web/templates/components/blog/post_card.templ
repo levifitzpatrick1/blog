@@ -1,22 +1,11 @@
 package blog
 
 import "github.com/levifitzpatrick1/blog/internal/utils"
-import "strings"
 
 templ PostCard(post utils.Post) {
-	{{
-		tagsAttr := ""
-		for i, t := range post.Tags {
-			if i > 0 {
-				tagsAttr += " "
-			}
-			tagsAttr += strings.ToLower(strings.ReplaceAll(t.Name, " ", "-"))
-		}
-	}}
 	<a href={ templ.URL("/blog/" + post.Slug) }>
 		<div
-			class="post-card material-card group overflow-hidden relative flex flex-col min-h-[20rem] transition-all duration-300 hover:shadow-2xl"
-			data-tags={ templ.JoinStringErrs(tagsAttr) }
+			class="post-card material-card group overflow-hidden relative flex flex-col min-h-[20rem] transition-all duration-300"
 			id={ templ.JoinStringErrs("post-" + post.Slug) }
 			x-data="{ hover: false }"
 			@mouseenter="hover = true"
@@ -24,7 +13,7 @@ templ PostCard(post utils.Post) {
 		>
 			<div class="absolute top-0 left-0 w-full h-1 gradient-accent transform origin-left transition-transform duration-300" :class="{ 'scale-x-100': hover, 'scale-x-0': !hover }"></div>
 
-			<h3 class="text-xl md:text-2xl font-bold text-primary leading-tight group-hover:text-accent transition-colors duration-300 px-8 pt-8 pb-4">
+			<h3 class="text-xl md:text-2xl font-bold text-primary leading-tight transition-colors duration-300 px-8 pt-8 pb-4">
 				{ post.Title }
 			</h3>
 
@@ -39,21 +28,7 @@ templ PostCard(post utils.Post) {
 
 				<div class="md:flex-1 p-8 pt-4 flex flex-col justify-between w-full">
 					<div>
-						if len(post.Tags) > 0 {
-							<div class="flex flex-wrap gap-2">
-								for _, tag := range post.Tags {
-									<span class="px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-accent/20 to-accent-hover/20 text-accent border border-accent/30">
-										{ tag.Name }
-									</span>
-								}
-							</div>
-						}
-
-						<div class="mt-4">
-							<hr class="border-border"/>
-						</div>
-
-						<div class="relative mt-4 h-20 overflow-hidden">
+						<div class="relative h-20 overflow-hidden">
 							<p class="text-secondary text-base leading-relaxed">
 								{ post.Blurb } ...
 							</p>
@@ -62,8 +37,6 @@ templ PostCard(post utils.Post) {
 					</div>
 				</div>
 			</div>
-
-			<div class="absolute inset-0 gradient-accent opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none"></div>
 		</div>
 	</a>
 }

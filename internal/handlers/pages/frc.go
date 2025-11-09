@@ -1,0 +1,26 @@
+package handlers
+
+import (
+	"log"
+	"net/http"
+
+	"github.com/levifitzpatrick1/blog/internal/utils"
+	"github.com/levifitzpatrick1/blog/web/templates/Pages/frc"
+)
+
+type FRCHandler struct {
+	Posts  []utils.Post
+	Logger *log.Logger
+}
+
+func NewFRCHandler(posts []utils.Post, l *log.Logger) *FRCHandler {
+	return &FRCHandler{Posts: posts, Logger: l}
+}
+
+func (h *FRCHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	err := frc.Frc().Render(r.Context(), w)
+	if err != nil {
+		h.Logger.Printf("Error rendering blog index page: %v", err)
+		http.Error(w, "Failed to render blog index", http.StatusInternalServerError)
+	}
+}

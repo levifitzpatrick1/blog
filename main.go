@@ -41,8 +41,7 @@ func main() {
 	//resume := handlers.NewResumeHandler(site.Posts, site.Logger)
 	blog := handlers.NewBlogIndexHandler(site.Posts, site.Logger)
 	post := handlers.NewPostHandler(site.Posts, site.Logger)
-	test := handlers.NewTestHandler(site.Posts, site.Logger)
-	//frc := handlers.NewFRCHandler(site.Posts, site.Logger)
+	frc := handlers.NewFRCHandler(site.Posts, site.Logger)
 
 	search := functions.NewSearchHandler(site.Posts, site.Logger)
 
@@ -52,9 +51,7 @@ func main() {
 	mux.HandleFunc("/{$}", home.ServeHTTP)
 	mux.HandleFunc("/blog", blog.ServeHTTP)
 	mux.HandleFunc("/blog/{slug}", post.ServeHTTP)
-	mux.HandleFunc("/test", test.ServeHTTP)
-	//mux.HandleFunc("/frc", frc.ServeHTTP)
-	//mux.HandleFunc("/resume", resume.ServeHTTP)
+	mux.HandleFunc("/frc", frc.ServeHTTP)
 
 	mux.HandleFunc("/search", search.ServeHTTP)
 
