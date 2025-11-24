@@ -1,0 +1,139 @@
+package atlas
+
+templ AtlasLayout(title string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>{ title }</title>
+			<link href="/static/css/style.css" rel="stylesheet"/>
+			<link rel="preconnect" href="https://fonts.googleapis.com" />
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+			<script src="https://unpkg.com/htmx.org@2.0.4" crossorigin="anonymous"></script>
+			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+			<style>
+				:root {
+					--color-background: #0D1117;
+					--color-primary: #C9D1D9;
+					--color-secondary: #8B949E;
+					--color-accent: #D4AF37;
+					--color-card-background: #161B22;
+					--color-border: #30363D;
+					--atlas-font: 'Inter', sans-serif;
+				}
+
+				body.atlas {
+					background-color: var(--color-background);
+					color: var(--color-primary);
+					font-family: var(--atlas-font);
+					background-image: linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.8)), url('/static/assets/wood-background.jpg');
+					background-size: cover;
+					background-position: center;
+					background-attachment: fixed;
+				}
+
+				/* Additional professional styling */
+				.atlas-container {
+					max-width: 1440px; /* Slightly wider for modern screens */
+					margin: 0 auto;
+					padding: 2rem; /* Base padding */
+				}
+
+				@media (min-width: 768px) {
+					.atlas-container {
+						padding: 3rem 4rem;
+					}
+				}
+
+				@media (min-width: 1024px) {
+					.atlas-container {
+						padding: 4rem 6rem; /* Luxurious spacing on large screens */
+					}
+				}
+
+				.atlas-section {
+					margin-bottom: 6rem; /* Increased separation between sections */
+				}
+
+				@media (min-width: 768px) {
+					.atlas-section {
+						margin-bottom: 8rem;
+					}
+				}
+				
+				.material-card {
+					background-color: var(--color-card-background);
+					border: 1px solid var(--color-border);
+					border-radius: 0.375rem;
+				}
+
+				.atlas-card {
+					padding: 2rem;
+					height: 100%; /* Ensure cards in grids stretch evenly */
+					display: flex;
+					flex-direction: column;
+					transition: all 0.3s ease-in-out;
+				}
+				
+				.atlas-card:hover {
+					transform: translateY(-5px);
+					box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+				}
+
+				@media (min-width: 768px) {
+					.atlas-card {
+						padding: 3rem;
+					}
+				}
+
+				/* Typography refinements */
+				.atlas-heading {
+					letter-spacing: -0.02em; /* Modern, tight heading tracking */
+					line-height: 1.1;
+					color: var(--color-accent);
+				}
+				
+				.btn-material {
+					background-color: var(--color-accent);
+					color: var(--color-background);
+					font-weight: 700;
+					padding: 1rem 2rem;
+					border-radius: 0.375rem;
+					transition: all 0.2s ease-in-out;
+				}
+
+				.btn-material:hover {
+					opacity: 0.9;
+				}
+
+			</style>
+		</head>
+		<body class="atlas min-h-screen">
+			<header class="atlas-container flex justify-between items-center py-4 md:py-6">
+				<a href="/eng-website-proj" class="text-2xl font-bold text-accent">Atlas Basses</a>
+				<nav class="hidden md:flex items-center space-x-8">
+					<a href="/eng-website-proj" class="text-lg font-medium text-primary hover:text-accent transition-colors">Home</a>
+					<a href="/eng-website-proj/about" class="text-lg font-medium text-primary hover:text-accent transition-colors">About</a>
+					<a href="/eng-website-proj/contact" class="text-lg font-medium text-primary hover:text-accent transition-colors">Contact</a>
+				</nav>
+                <div class="md:hidden">
+                    <!-- Mobile menu button -->
+                </div>
+			</header>
+			<main>
+				{ children... }
+			</main>
+			<footer class="atlas-container mt-16 md:mt-24 border-t border-border">
+                <div class="py-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+					<p class="text-secondary mb-4 md:mb-0">&copy; 2025 Atlas Basses. All rights reserved.</p>
+					<div class="flex items-center space-x-6">
+					</div>
+				</div>
+			</footer>
+		</body>
+	</html>
+}

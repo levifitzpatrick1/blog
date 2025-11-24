@@ -42,6 +42,7 @@ func main() {
 	blog := handlers.NewBlogIndexHandler(site.Posts, site.Logger)
 	post := handlers.NewPostHandler(site.Posts, site.Logger)
 	frc := handlers.NewFRCHandler(site.Posts, site.Logger)
+	engproj := handlers.NewEngProjHandler(site.Logger)
 
 	search := functions.NewSearchHandler(site.Posts, site.Logger)
 
@@ -52,6 +53,9 @@ func main() {
 	mux.HandleFunc("/blog", blog.ServeHTTP)
 	mux.HandleFunc("/blog/{slug}", post.ServeHTTP)
 	mux.HandleFunc("/frc", frc.ServeHTTP)
+	mux.HandleFunc("/eng-website-proj", engproj.Index)
+	mux.HandleFunc("/eng-website-proj/about", engproj.About)
+	mux.HandleFunc("/eng-website-proj/contact", engproj.Contact)
 
 	mux.HandleFunc("/search", search.ServeHTTP)
 
