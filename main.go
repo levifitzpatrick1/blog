@@ -24,7 +24,7 @@ func main() {
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime|log.Lshortfile)
 
-	store := markdown.NewPostStore("BlogMarkdowns/Blog", logger)
+	store := markdown.NewPostStore("BlogMarkdowns", logger)
 
 	site := &Site{
 		Store:  store,
