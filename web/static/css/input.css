@@ -36,22 +36,11 @@
   }
 
   .gradient-accent {
-    background: linear-gradient(
-      135deg,
-      #4fc3f7 0%,
-      #29b6f6 40%,
-      #0288d1 70%,
-      #01579b 100%
-    );
+    background: var(--color-accent);
   }
 
   .gradient-accent-subtle {
-    background: linear-gradient(
-      135deg,
-      rgba(79, 195, 247, 0.15) 0%,
-      rgba(41, 182, 246, 0.15) 50%,
-      rgba(2, 136, 209, 0.15) 100%
-    );
+    background: rgba(79, 195, 247, 0.15);
   }
 
   .btn-material {
@@ -133,16 +122,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(
-      135deg,
-      #4fc3f7 0%,
-      #29b6f6 40%,
-      #0288d1 70%,
-      #01579b 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--color-accent);
   }
 
   .truncate-3-lines {
@@ -194,48 +174,14 @@
   }
 
   .prose a {
-    background: linear-gradient(
-      135deg,
-      #4fc3f7 0%,
-      #29b6f6 40%,
-      #0288d1 70%,
-      #01579b 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-decoration: none;
+    color: var(--color-accent);
+    text-decoration: underline;
     font-weight: 600;
-    border-bottom: 2px solid transparent;
-    background-size: 200% 100%;
-    background-position: 0% 50%;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  .prose a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(
-      135deg,
-      #4fc3f7 0%,
-      #29b6f6 40%,
-      #0288d1 70%,
-      #01579b 100%
-    );
-    transition: width 0.3s ease;
-  }
-
-  .prose a:hover::after {
-    width: 100%;
+    transition: color 0.2s ease;
   }
 
   .prose a:hover {
-    background-position: 100% 50%;
+    color: var(--color-accent-hover);
   }
 }
 
@@ -349,4 +295,22 @@
   );
   background-size: 1000px 100%;
   animation: shimmer 2s infinite;
+}
+
+/* HTMX search container loading indicator rules */
+.search-container .htmx-indicator {
+  display: none;
+}
+.search-container.htmx-request .htmx-indicator {
+  display: inline-block;
+}
+.search-container.htmx-request .search-icon {
+  display: none;
+}
+
+/* Swap transition rules for search results */
+.htmx-swapping #blog-results,
+#blog-results.htmx-swapping {
+  opacity: 0.5;
+  transition: opacity 150ms ease-out;
 }

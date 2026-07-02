@@ -4,17 +4,15 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/levifitzpatrick1/blog/internal/utils"
 	"github.com/levifitzpatrick1/blog/web/templates/Pages/frc"
 )
 
 type FRCHandler struct {
-	Posts  []utils.Post
 	Logger *log.Logger
 }
 
-func NewFRCHandler(posts []utils.Post, l *log.Logger) *FRCHandler {
-	return &FRCHandler{Posts: posts, Logger: l}
+func NewFRCHandler(l *log.Logger) *FRCHandler {
+	return &FRCHandler{Logger: l}
 }
 
 func (h *FRCHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {

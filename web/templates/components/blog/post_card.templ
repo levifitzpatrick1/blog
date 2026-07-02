@@ -3,40 +3,17 @@ package blog
 import "github.com/levifitzpatrick1/blog/internal/utils"
 
 templ PostCard(post utils.Post) {
-	<a href={ templ.URL("/blog/" + post.Slug) }>
-		<div
-			class="post-card material-card group overflow-hidden relative flex flex-col min-h-[20rem] transition-all duration-300"
-			id={ templ.JoinStringErrs("post-" + post.Slug) }
-			x-data="{ hover: false }"
-			@mouseenter="hover = true"
-			@mouseleave="hover = false"
-		>
-			<div class="absolute top-0 left-0 w-full h-1 gradient-accent transform origin-left transition-transform duration-300" :class="{ 'scale-x-100': hover, 'scale-x-0': !hover }"></div>
-
-			<h3 class="text-xl md:text-2xl font-bold text-primary leading-tight transition-colors duration-300 px-8 pt-8 pb-4">
+	<a href={ templ.URL("/blog/" + post.Slug) } class="group block py-6 border-b border-border hover:border-accent/40 transition-colors duration-200">
+		<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2">
+			<h3 class="text-xl font-semibold text-primary group-hover:text-accent transition-colors duration-200">
 				{ post.Title }
 			</h3>
-
-			<div class="flex flex-row flex-grow">
-				<div class="md:w-1/5 w-full bg-card-background flex items-center justify-center p-4 flex-shrink-0">
-					<div class="text-secondary text-center">
-						<span class="block text-lg font-semibold text-gradient">{ post.CreateDate.Format("02") }</span>
-						<span class="block text-xs uppercase opacity-70">{ post.CreateDate.Format("Jan") }</span>
-						<span class="block text-xs opacity-50">{ post.CreateDate.Format("2006") }</span>
-					</div>
-				</div>
-
-				<div class="md:flex-1 p-8 pt-4 flex flex-col justify-between w-full">
-					<div>
-						<div class="relative h-20 overflow-hidden">
-							<p class="text-secondary text-base leading-relaxed">
-								{ post.Blurb } ...
-							</p>
-							<div class="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-card-background via-card-background/80 to-transparent"></div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<span class="text-sm text-secondary shrink-0">
+				{ post.CreateDate.Format("January 2, 2006") }
+			</span>
 		</div>
+		<p class="text-secondary text-base mt-2 line-clamp-2 leading-relaxed">
+			{ post.Blurb }
+		</p>
 	</a>
 }

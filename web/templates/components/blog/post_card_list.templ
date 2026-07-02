@@ -3,20 +3,18 @@ package blog
 import "github.com/levifitzpatrick1/blog/internal/utils"
 
 templ PostCardList(posts []utils.Post) {
-	<div class="mx-auto max-w-7xl px-4">
-		<div class="post-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+	<div class="mx-auto max-w-3xl px-4">
+		<div class="post-list flex flex-col">
 			for _, post := range posts {
-				<div>
-					@PostCard(post)
-				</div>
+				@PostCard(post)
 			}
 		</div>
 		if len(posts) == 0 {
 			<div class="text-center py-16">
-				<div class="material-card inline-block px-12 py-8">
-					<span class="material-symbols-outlined text-7xl mx-auto mb-4 text-secondary block leading-none">sentiment_satisfied</span>
-					<p class="text-xl text-secondary font-medium">No posts found</p>
-					<p class="text-sm text-secondary mt-2">Try adjusting your search</p>
+				<div class="py-8">
+					<span class="material-symbols-outlined text-5xl mx-auto mb-4 text-secondary block leading-none">sentiment_satisfied</span>
+					<p class="text-lg text-secondary font-medium">No posts found</p>
+					<p class="text-sm text-secondary mt-1">Try adjusting your search</p>
 				</div>
 			</div>
 		}

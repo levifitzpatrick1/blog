@@ -6,33 +6,21 @@ type AccordionItem struct {
 }
 
 templ Accordion(items []AccordionItem) {
-	<div x-data="{ openItem: null }" class="space-y-2">
-		for i, item := range items {
-			@AccordionItemComponent(item, i)
+	<div class="space-y-2">
+		for _, item := range items {
+			@AccordionItemComponent(item)
 		}
 	</div>
 }
 
-templ AccordionItemComponent(item AccordionItem, index int) {
-	<div class="border rounded-lg">
-		<h2>
-			<button
-				@click="openItem = openItem === index ? null : index"
-				type="button"
-				class="flex items-center justify-between w-full p-4 font-medium text-left"
-				:aria-expanded="openItem === index"
-			>
-				<span>{ item.Title }</span>
-				<span
-					class="material-symbols-outlined text-base shrink-0 transition-transform duration-200 leading-none"
-					:class="{ 'rotate-180': openItem === index }"
-				>expand_more</span>
-			</button>
-		</h2>
-		<div x-show="openItem === index" x-collapse>
-			<div class="p-4 border-t">
-				@item.Content
-			</div>
+templ AccordionItemComponent(item AccordionItem) {
+	<details class="border border-border rounded-lg group">
+		<summary class="flex items-center justify-between w-full p-4 font-medium text-left cursor-pointer list-none select-none">
+			<span>{ item.Title }</span>
+			<span class="material-symbols-outlined text-base shrink-0 transition-transform duration-200 leading-none group-open:rotate-180">expand_more</span>
+		</summary>
+		<div class="p-4 border-t border-border">
+			@item.Content
 		</div>
-	</div>
+	</details>
 }

@@ -7,12 +7,11 @@ import (
 
 	"github.com/levifitzpatrick1/blog/internal/handlers/functions"
 	handlers "github.com/levifitzpatrick1/blog/internal/handlers/pages"
-	"github.com/levifitzpatrick1/blog/internal/utils"
 	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
 )
 
 type Site struct {
-	Posts  []utils.Post
+	Store  *markdown.PostStore
 	Logger *log.Logger
 }
 
@@ -25,26 +24,22 @@ func main() {
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime|log.Lshortfile)
 
-	posts, err := markdown.LoadPosts("BlogMarkdowns/Blog", logger)
-	if err != nil {
-		logger.Fatalf("Failed to load posts: %v", err)
-	}
+	store := markdown.NewPostStore("BlogMarkdowns/Blog", logger)
 
 	site := &Site{
-		Posts:  posts,
+		Store:  store,
 		Logger: logger,
 	}
 
 	mux := http.NewServeMux()
 
-	home := handlers.NewHomeHandler(site.Posts, site.Logger)
-	//resume := handlers.NewResumeHandler(site.Posts, site.Logger)
-	blog := handlers.NewBlogIndexHandler(site.Posts, site.Logger)
-	post := handlers.NewPostHandler(site.Posts, site.Logger)
-	frc := handlers.NewFRCHandler(site.Posts, site.Logger)
+	home := handlers.NewHomeHandler(site.Store, site.Logger)
+	blog := handlers.NewBlogIndexHandler(site.Store, site.Logger)
+	post := handlers.NewPostHandler(site.Store, site.Logger)
+	frc := handlers.NewFRCHandler(site.Logger)
 	engproj := handlers.NewEngProjHandler(site.Logger)
 
-	search := functions.NewSearchHandler(site.Posts, site.Logger)
+	search := functions.NewSearchHandler(site.Store, site.Logger)
 
 	staticDir := "./web/static"
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
@@ -60,9 +55,9 @@ func main() {
 	mux.HandleFunc("/search", search.ServeHTTP)
 
 	logger.Printf("Starting server @ %s", addr)
-	err = http.ListenAndServe(addr, mux)
+	err := http.ListenAndServe(addr, mux)
 	if err != nil {
-		logger.Fatal("ListenAndServer error: ", err)
+		logger.Fatal("ListenAndServe error: ", err)
 	}
 
 }

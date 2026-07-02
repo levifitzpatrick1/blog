@@ -5,25 +5,33 @@ import (
 	"net/http"
 
 	"github.com/levifitzpatrick1/blog/internal/utils"
+	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
 	home "github.com/levifitzpatrick1/blog/web/templates/Pages/Home"
 )
 
 type HomeHandler struct {
-	Posts  []utils.Post
+	Store  *markdown.PostStore
 	Logger *log.Logger
 }
 
-func NewHomeHandler(posts []utils.Post, l *log.Logger) *HomeHandler {
-	return &HomeHandler{Posts: posts, Logger: l}
+func NewHomeHandler(store *markdown.PostStore, l *log.Logger) *HomeHandler {
+	return &HomeHandler{Store: store, Logger: l}
 }
 
 func (h *HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	var latestPost utils.Post
-	if len(h.Posts) > 0 {
-		latestPost = h.Posts[0]
+	posts, err := h.Store.GetPosts()
+	if err != nil {
+		h.Logger.Printf("Error getting posts: %v", err)
+		http.Error(w, "Failed to load posts", http.StatusInternalServerError)
+		return
 	}
 
-	err := home.Home(latestPost).Render(r.Context(), w)
+	var latestPost utils.Post
+	if len(posts) > 0 {
+		latestPost = posts[0]
+	}
+
+	err = home.Home(latestPost).Render(r.Context(), w)
 	if err != nil {
 		h.Logger.Printf("Error rendering home page: %v", err)
 		http.Error(w, "Failed to render home page", http.StatusInternalServerError)

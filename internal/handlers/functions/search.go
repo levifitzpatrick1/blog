@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/levifitzpatrick1/blog/internal/utils"
+	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
 	components "github.com/levifitzpatrick1/blog/web/templates/components/blog"
 )
 
@@ -13,22 +14,29 @@ import (
 // It performs case-insensitive matching against post titles and tags.
 // Partial matches are supported (substring matching).
 type SearchHandler struct {
-	Posts  []utils.Post
+	Store  *markdown.PostStore
 	Logger *log.Logger
 }
 
-func NewSearchHandler(posts []utils.Post, l *log.Logger) *SearchHandler {
-	return &SearchHandler{Posts: posts, Logger: l}
+func NewSearchHandler(store *markdown.PostStore, l *log.Logger) *SearchHandler {
+	return &SearchHandler{Store: store, Logger: l}
 }
 
 func (h *SearchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	posts, err := h.Store.GetPosts()
+	if err != nil {
+		h.Logger.Printf("Error getting posts: %v", err)
+		http.Error(w, "Failed to load posts", http.StatusInternalServerError)
+		return
+	}
+
 	// Read and normalize the query.
 	raw := r.FormValue("search")
 	query := strings.TrimSpace(strings.ToLower(raw))
 
 	// If empty, return all posts.
 	if query == "" {
-		component := components.PostCardList(h.Posts)
+		component := components.PostCardList(posts)
 		if err := component.Render(r.Context(), w); err != nil {
 			h.Logger.Print("Error rendering search results: ", err)
 			http.Error(w, "Failed to render search results.", http.StatusInternalServerError)
@@ -41,7 +49,7 @@ func (h *SearchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	tokens := strings.Fields(query)
 
 	var filteredPosts []utils.Post
-	for _, post := range h.Posts {
+	for _, post := range posts {
 		// Precompute lowercase title and tag strings for efficient checks.
 		title := strings.ToLower(post.Title)
 
