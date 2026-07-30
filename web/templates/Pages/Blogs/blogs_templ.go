@@ -8,9 +8,9 @@ package blogs
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/levifitzpatrick1/blog/web/templates/layouts"
-import "github.com/levifitzpatrick1/blog/internal/utils"
-import "github.com/levifitzpatrick1/blog/web/templates/components/blog"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/layouts"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/components/blog"
 
 func Blogs(data []utils.Post) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {

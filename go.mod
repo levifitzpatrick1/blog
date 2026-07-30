@@ -1,4 +1,4 @@
-module github.com/levifitzpatrick1/blog
+module github.com/levifitzpatrick1/levifitzpatrick.page
 
 go 1.25.0
 

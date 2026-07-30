@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/levifitzpatrick1/blog/internal/utils"
-	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
-	blogs "github.com/levifitzpatrick1/blog/web/templates/Pages/Blogs"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils/markdown"
+	blogs "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/Pages/Blogs"
 )
 
 type PostHandler struct {

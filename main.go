@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/levifitzpatrick1/blog/internal/handlers/functions"
-	handlers "github.com/levifitzpatrick1/blog/internal/handlers/pages"
-	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/handlers/functions"
+	handlers "github.com/levifitzpatrick1/levifitzpatrick.page/internal/handlers/pages"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils/markdown"
 )
 
 type Site struct {
@@ -42,6 +42,17 @@ func main() {
 
 	staticDir := "./web/static"
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
+
+	// PackoutPlanner is a self-contained client-side app, built elsewhere and
+	// dropped in as flat files, so it just needs a file server of its own rather
+	// than a templ page.
+	packoutDir := "./web/packout"
+	mux.Handle("/packout/", http.StripPrefix("/packout/", http.FileServer(http.Dir(packoutDir))))
+	// Its asset URLs are relative, so they only resolve from a trailing slash —
+	// "/packout" would make the browser look for /_app/... at the site root.
+	mux.HandleFunc("/packout", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/packout/", http.StatusMovedPermanently)
+	})
 
 	mux.HandleFunc("/{$}", home.ServeHTTP)
 	mux.HandleFunc("/blog", blog.ServeHTTP)

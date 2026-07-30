@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/levifitzpatrick1/blog/web/templates/Pages/frc"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/Pages/frc"
 )
 
 type FRCHandler struct {

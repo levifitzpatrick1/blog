@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/levifitzpatrick1/blog/internal/utils"
-	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
-	components "github.com/levifitzpatrick1/blog/web/templates/components/blog"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils/markdown"
+	components "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/components/blog"
 )
 
 // SearchHandler serves search requests for blog posts.

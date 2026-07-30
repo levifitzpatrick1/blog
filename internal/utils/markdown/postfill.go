@@ -10,7 +10,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/levifitzpatrick1/blog/internal/utils"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
 	"gopkg.in/yaml.v3"
 )
 

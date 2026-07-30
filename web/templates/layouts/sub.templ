@@ -37,6 +37,7 @@ templ Sub(title, currentPath string, scripts ...templ.Component) {
 						<div class="hidden md:flex items-center space-x-6">
 							@navButton(NavLink{Path: "/frc", Label: "FRC"}, currentPath)
 							@navButton(NavLink{Path: "/blog", Label: "Blog"}, currentPath)
+							@navButton(NavLink{Path: "/packout/", Label: "Packout"}, currentPath)
 						</div>
 						<div class="md:hidden">
 							<button
@@ -56,6 +57,7 @@ templ Sub(title, currentPath string, scripts ...templ.Component) {
 					<div class="px-4 py-4 space-y-2">
 						@navButtonMobile(NavLink{Path: "/frc", Label: "FRC"}, currentPath)
 						@navButtonMobile(NavLink{Path: "/blog", Label: "Blog"}, currentPath)
+						@navButtonMobile(NavLink{Path: "/packout/", Label: "Packout"}, currentPath)
 					</div>
 				</div>
 			</nav>

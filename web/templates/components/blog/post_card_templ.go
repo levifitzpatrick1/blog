@@ -8,7 +8,7 @@ package blog
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/levifitzpatrick1/blog/internal/utils"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
 
 func PostCard(post utils.Post) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {

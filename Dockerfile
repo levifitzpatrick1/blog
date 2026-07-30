@@ -13,5 +13,6 @@ FROM debian:bookworm
 WORKDIR /app
 COPY --from=builder /usr/src/app/BlogMarkdowns ./BlogMarkdowns
 COPY --from=builder /usr/src/app/web/static ./web/static
+COPY --from=builder /usr/src/app/web/packout ./web/packout
 COPY --from=builder /run-app .
 CMD ["./run-app"]

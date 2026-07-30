@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/levifitzpatrick1/blog/internal/utils"
-	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
-	home "github.com/levifitzpatrick1/blog/web/templates/Pages/Home"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils/markdown"
+	home "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/Pages/Home"
 )
 
 type HomeHandler struct {

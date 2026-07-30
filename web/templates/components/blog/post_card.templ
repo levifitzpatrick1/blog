@@ -1,6 +1,6 @@
 package blog
 
-import "github.com/levifitzpatrick1/blog/internal/utils"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
 
 templ PostCard(post utils.Post) {
 	<a href={ templ.URL("/blog/" + post.Slug) } class="group block py-6 border-b border-border hover:border-accent/40 transition-colors duration-200">

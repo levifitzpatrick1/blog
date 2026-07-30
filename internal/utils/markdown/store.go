@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/levifitzpatrick1/blog/internal/utils"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
 )
 
 type PostStore struct {

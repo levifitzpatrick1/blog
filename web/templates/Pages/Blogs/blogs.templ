@@ -1,8 +1,8 @@
 package blogs
 
-import "github.com/levifitzpatrick1/blog/web/templates/layouts"
-import "github.com/levifitzpatrick1/blog/internal/utils"
-import "github.com/levifitzpatrick1/blog/web/templates/components/blog"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/layouts"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/components/blog"
 
 templ Blogs(data []utils.Post) {
 	@layouts.Sub("Blog", "/blog", layouts.HtmxScript()) {

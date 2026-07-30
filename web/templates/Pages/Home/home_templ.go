@@ -8,8 +8,8 @@ package home
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/levifitzpatrick1/blog/web/templates/layouts"
-import "github.com/levifitzpatrick1/blog/internal/utils"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/layouts"
+import "github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils"
 
 func Home(latestPost utils.Post) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -44,7 +44,7 @@ func Home(latestPost utils.Post) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full min-h-screen\"><div class=\"text-center pt-12 pb-16 sm:pt-16 sm:pb-20 slide-up\"><h1 class=\"text-5xl md:text-6xl text-white font-bold mb-8\">Levi Fitzpatrick</h1><div class=\"flex flex-col sm:flex-row justify-center gap-4\"><a href=\"/frc\" class=\"btn-material bg-background text-accent border-2 border-accent font-bold py-4 px-10 rounded-xl transition-all duration-300\">FRC</a> <a href=\"/blog\" class=\"btn-material bg-background text-accent border-2 border-accent font-bold py-4 px-10 rounded-xl transition-all duration-300\">Blog</a></div></div><div class=\"max-w-2xl mx-auto px-4 pb-12 text-center fade-in\"><p class=\"text-secondary text-xl leading-relaxed\">I am Levi Fitzpatrick. This site is a place for me to store posts about projects and Ideas that I have, and are currently, working on. Many of the posts here will end up being related to designing FRC Robots both in mechanical and software scopes. I am currently a lead mentor of FRC Team 2064 Panther Project, mainly filling the role of software engineer mentor. This stems from my career choice of a mechanical engineer masquerading as a software engineer.</p></div><div class=\"text-center py-12 px-4 fade-in\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full min-h-screen\"><div class=\"text-center pt-12 pb-16 sm:pt-16 sm:pb-20 slide-up\"><h1 class=\"text-5xl md:text-6xl text-white font-bold mb-8\">Levi Fitzpatrick</h1><div class=\"flex flex-col sm:flex-row justify-center gap-4\"><a href=\"/frc\" class=\"btn-material bg-background text-accent border-2 border-accent font-bold py-4 px-10 rounded-xl transition-all duration-300\">FRC</a> <a href=\"/blog\" class=\"btn-material bg-background text-accent border-2 border-accent font-bold py-4 px-10 rounded-xl transition-all duration-300\">Blog</a> <a href=\"/packout/\" class=\"btn-material bg-background text-accent border-2 border-accent font-bold py-4 px-10 rounded-xl transition-all duration-300\">Packout</a></div></div><div class=\"max-w-2xl mx-auto px-4 pb-12 text-center fade-in\"><p class=\"text-secondary text-xl leading-relaxed\">I am Levi Fitzpatrick. This site is a place for me to store posts about projects and Ideas that I have, and are currently, working on. Many of the posts here will end up being related to designing FRC Robots both in mechanical and software scopes. I am currently a lead mentor of FRC Team 2064 Panther Project, mainly filling the role of software engineer mentor. This stems from my career choice of a mechanical engineer masquerading as a software engineer.</p></div><div class=\"text-center py-12 px-4 fade-in\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -56,7 +56,7 @@ func Home(latestPost utils.Post) templ.Component {
 				var templ_7745c5c3_Var3 templ.SafeURL
 				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL("/blog/" + latestPost.Slug))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 44, Col: 51}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 50, Col: 51}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 				if templ_7745c5c3_Err != nil {
@@ -69,7 +69,7 @@ func Home(latestPost utils.Post) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(latestPost.Blurb)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 48, Col: 26}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/Pages/Home/home.templ`, Line: 54, Col: 26}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {

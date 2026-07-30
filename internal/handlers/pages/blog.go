@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/levifitzpatrick1/blog/internal/utils/markdown"
-	blogs "github.com/levifitzpatrick1/blog/web/templates/Pages/Blogs"
+	"github.com/levifitzpatrick1/levifitzpatrick.page/internal/utils/markdown"
+	blogs "github.com/levifitzpatrick1/levifitzpatrick.page/web/templates/Pages/Blogs"
 )
 
 type BlogIndexHandler struct {
